@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { ArrowRight, BookOpen, Building, ExternalLink, Info, Link, MessageSquare, UserPlus, Users } from "lucide-react";
+import { ArrowRight, BookOpen, Building, ExternalLink, Info, Link, MessageSquare, Search, UserPlus, Users } from "lucide-react";
 import HeroSection from '../components/HeroSection';
 import GEPIntroSection from '../components/GEPIntroSection';
 import LoadingSpinner from "./LoadingSpinner";
-import WorldMap from "@/components/WorldMap"; // Assuming this is your UNESCO map component
-import StoryCard from "@/components/StoryCard"; // Assuming you have a StoryCard component
+import WorldMap from "./../components/WorldMap"; // Assuming this is your UNESCO map component
+import StoryCard from "./../components/StoryCard"; // Assuming you have a StoryCard component
 import { School } from 'lucide-react';
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
+// At the top of your file with other imports
+import pillar1_image from '../imgs/pillar1.png';
+import pillar2_image from '../imgs/pillar2.png';
+import pillar3_image from '../imgs/pillar3.png';
+import pillar4_image from '../imgs/pillar4.png';
+
 
 /**
  * PillarCard Component
@@ -27,28 +33,34 @@ const pillarIcons: Record<string, React.ElementType> = {
   'pillar4': Building, // Greening Communities
 };
 
-
 const PillarCard = ({ pillar }) => {
-  const progress = (pillar.current / pillar.total) * 100;
   const percentage = pillar.total > 0 ? (pillar.current / pillar.total) * 100 : 0;
-  const PillarIcon = pillarIcons[pillar.id] || Info;
-  return (
-    // The h-full class makes the card take the full height of the grid row
-    <div className="bg-gradient-to-br from-white to-gray-50 p-6 rounded-2xl shadow-lg border border-gray-100 flex flex-col h-full hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-      
-      <div className="flex items-start mb-4">
-        <div className="bg-green-100 p-2 rounded-lg mr-4">
-           <PillarIcon size={28} className="text-[#16A34A]" />
-        </div>
-        <h3 className="text-xl font-bold text-gray-800">{pillar.name}</h3>
-      </div>
 
-      <p className="text-gray-600 text-sm mb-5 flex-grow">{pillar.vision}</p>
+  return (
+    // Increased min-height
+    <div className="bg-gradient-to-br from-white to-gray-50 p-6 rounded-2xl shadow-lg border border-gray-100 flex flex-col h-full hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 min-h-[320px]">
+      {/* Increased margin-bottom */}
+      <div className="flex items-start mb-5">
+        {/* Replacing icon with image */}
+        <img
+          src={pillar.customImage}
+          alt={pillar.name}
+          className="w-14 h-14 object-contain" // Slightly larger image
+        />
+
+        {/* Added margin-left */}
+        <h3 className="text-xl font-bold text-gray-800 ml-3">
+          {pillar.name}
+        </h3>
+      </div>
       
-      <div className="mb-5">
-        <div className="w-full bg-gray-200 rounded-full h-2.5 my-2">
+      {/* Increased margin-bottom */}
+      <div className="mb-6">
+        {/* Slightly thicker progress bar */}
+        <div className="w-full bg-gray-200 rounded-full h-3 my-3">
+          {/* Matching thickness */}
           <div
-            className="bg-[#16A34A] h-2.5 rounded-full"
+            className="bg-[#16A34A] h-3 rounded-full"
             style={{ width: `${percentage}%` }}
             title={`${percentage.toFixed(1)}%`}
           ></div>
@@ -56,20 +68,23 @@ const PillarCard = ({ pillar }) => {
         <p className="text-gray-800 text-sm font-medium">
           <span className="font-bold">{pillar.current.toLocaleString()}</span> / {pillar.total.toLocaleString()} {pillar.unit}
         </p>
-        <p className="text-gray-500 text-xs mt-1">
+        {/* Increased margin-top */}
+        <p className="text-gray-500 text-xs mt-2">
           Target: {pillar.target}
         </p>
       </div>
 
       <a
         href={pillar.link}
-        className="mt-auto block text-center bg-[#16A34A] text-white px-6 py-2.5 rounded-lg text-md font-semibold hover:bg-[#15803d] transition-colors duration-300 shadow-sm"
+        // Increased padding-y
+        className="mt-auto block text-center bg-[#16A34A] text-white px-6 py-3 rounded-lg text-md font-semibold hover:bg-[#15803d] transition-colors duration-300 shadow-sm"
       >
         Learn More
       </a>
     </div>
   );
 };
+
 
 // --- New Quick Links Section ---
 const QuickLinksSection = () => {
@@ -118,8 +133,8 @@ const GlobalDashboard = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [suggestions, setSuggestions] = useState<{ name: string; id: string }[]>([]);
     const [searchResults, setSearchResults] = useState([]);
-    const [menuOpen, setMenuOpen] = useState(false);
     const navigate = useNavigate();
+    const [isSearchFocused, setIsSearchFocused] = useState(false);
 
     const countriesList = [
     { name: "Morocco", id: "morocco", region: "North Africa" },
@@ -155,14 +170,17 @@ const GlobalDashboard = () => {
       country.name
         .toLowerCase()
         .split(" ")
-        .some((word) => word.startsWith(value.toLowerCase()))
+        .some((word) => word.startsWith(value.toLowerCase())
+    )
     );
     console.log({filtered})
     setSuggestions(filtered);
   };
-  const handleCountryClick = (countryId) => {
+  const handleCountryClick = (countryId : string) => {
     navigate(`/country/${countryId}`);
-    setSearchTerm(''); // Clear search after selection
+    console.log(`Navigating to country profile for: ${countryId}`);
+    
+    setSearchTerm(''); // n
   };
     // Data for the four pillars as specified in the PowerPoint
     const pillarData = [
@@ -265,73 +283,90 @@ const GlobalDashboard = () => {
             <GEPIntroSection />
 
             {/* Interactive Map Section */}
-            <div className="max-w-6xl mx-auto mt-12 mb-8 text-center">
-                <h2 className="text-xl md:text-2xl font-bold mb-4 text-center text-[#004b45]">Global Progress Tracker</h2>
-                <p className="text-gray-600 text-center text-sm mb-6">
-                    Our intent is to include an interactive map where users can hover over a country and click to access its country profile page.
-                </p>
-                <div className="relative w-full max-w-4xl mx-auto">
-          <input
-            type="text"
-            placeholder="Search for a country or region..."
-            className="w-full p-3 pl-10 rounded-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm transition-all"
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
-          {suggestions.length > 0 && (
-              <ul className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg">
-                {suggestions.map((country) => (
-                   <ul className="absolute z-10 mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
-                                    {suggestions.map((country) => (
-                                        <li key={country.id} onMouseDown={() => handleCountryClick(country.id)}
-                                            className="px-4 py-3 text-sm text-gray-700 hover:bg-green-50 cursor-pointer"
-                                        >
-                                            <span className="font-semibold">{country.name}</span>
-                                            <span className="text-gray-500 ml-2">({country.region})</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                ))}
-            </ul>
-          )}
-          {searchTerm.length > 0 && searchResults.length === 0 && (
-            <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-md shadow-lg mt-2 p-3 text-gray-500 z-10">
-              No results found.
-            </div>
-          )}
-        </div>
-                <div className="border rounded-lg shadow-lg p-4 bg-white">
-                 {/* The UNESCO map will be provided and implemented here */}
-                    <WorldMap />
-                </div>
-            </div>
+            {/* --- New Combined Map and Pillars Section --- */}
+            <section className="max-w-screen-2xl mx-auto py-16 px-4">
+    <div className="text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold text-[#004b45]">Global Progress Tracker</h2>
+        <p className="text-gray-600 mt-4 max-w-3xl mx-auto">
+            Explore our progress on the four pillars of the Greening Education Partnership. Search the map to find country-specific data.
+        </p>
+    </div>
 
-            {/* Four Pillars Section */}
-            {/* <div className="max-w-6xl mx-auto text-center mt-12">
-                <h2 className="text-xl md:text-2xl font-bold mb-6 text-[#004b45]">Four Pillars of Progress</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {pillarData.map((pillar) => (
-                        <PillarCard
-                            key={pillar.id}
-                            title={pillar.title}
-                            current={pillar.current}
-                            total={pillar.total}
-                            unit={pillar.unit}
-                            description={pillar.description}
-                            link={pillar.link}
-                        />
-                    ))}
-                </div>
-            </div> */}
-            {/* Pillars Progress Section */}
-      <section className="bg-white p-8 rounded-lg relative ">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Our Four Pillars of Action</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {pillarData.map((pillar) => (
-            <PillarCard key={pillar.id} pillar={pillar}/>
-          ))}
+    <div className="grid grid-cols-1 lg:grid-cols-7 lg:gap-8 items-start"> {/* Changed to 7 columns */}
+        {/* Left Pillars - Pillar 1 and 3 - Now spans 2 columns */}
+        <div className="hidden lg:flex lg:flex-col lg:col-span-2 lg:gap-8">
+            <PillarCard key={pillarData[0].id} pillar={{...pillarData[0], customImage: pillar1_image}} />
+            <PillarCard key={pillarData[2].id} pillar={{...pillarData[2], customImage: pillar3_image}} />
         </div>
-      </section>
+
+        {/* Center Map - Reduced to 3 columns (from 5) */}
+        <div className="lg:col-span-3 mb-8 lg:mb-0">
+            <div className="relative w-full max-w-lg mx-auto mb-6">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                <input
+                    type="text"
+                    placeholder="Search for a country or region..."
+                    className="w-full p-3 pl-12 rounded-full border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm transition-all bg-white"
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    onFocus={() => setIsSearchFocused(true)}
+                    onBlur={() => setTimeout(() => setIsSearchFocused(false), 150)}
+                />
+                {isSearchFocused && suggestions.length > 0 && (
+                    <ul className="absolute z-10 mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                        {suggestions.map((country) => (
+                            <li key={country.id} onMouseDown={() => handleCountryClick(country.name)}
+                                className="px-4 py-3 text-sm text-gray-700 hover:bg-green-50 cursor-pointer"
+                            >
+                                <span className="font-semibold">{country.name}</span>
+                                <span className="text-gray-500 ml-2">({country.region})</span>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+                {isSearchFocused && searchTerm.length > 0 && suggestions.length === 0 && (
+                    <div className="absolute z-10 mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg p-4 text-gray-500">
+                        No results found.
+                    </div>
+                )}
+            </div>
+            <div className="border-2 border-gray-200 rounded-2xl shadow-lg p-6 bg-white">
+                <WorldMap className="w-full h-auto" /> {/* Added className here */}
+            </div>
+            {/* NEW: External Data/Partner Data Section */}
+<div className="mt-8 bg-white border-2 border-gray-200 rounded-2xl shadow-lg p-6">
+    <h3 className="text-xl font-semibold text-[#004b45] mb-4">Partner Data & External Resources</h3>
+    <div className="min-h-[50px] p-4 bg-gray-50 rounded-lg border border-dashed border-gray-300">
+        {/* This space will be dynamically filled with external data */}
+        <p className="text-gray-500 text-center py-2">
+            [External partner data and resources will be displayed here]
+        </p>
+    </div>
+    <div className="mt-4 text-sm text-gray-600">
+        <p>Data provided by our partners will appear in this section, including:</p>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+            <li>Regional progress reports</li>
+            <li>Partner organization updates</li>
+            <li>Third-party research findings</li>
+        </ul>
+    </div>
+</div>
+        </div>
+        
+        {/* Right Pillars - Pillar 2 and 4 - Now spans 2 columns */}
+        <div className="hidden lg:flex lg:flex-col lg:col-span-2 lg:gap-8">
+            <PillarCard key={pillarData[1].id} pillar={{...pillarData[1], customImage: pillar2_image}} />
+            <PillarCard key={pillarData[3].id} pillar={{...pillarData[3], customImage: pillar4_image}} />
+        </div>
+        
+        {/* Pillars for Mobile/Tablet View */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-6 mt-8">
+            {pillarData.map((pillar, index) => (
+                <PillarCard key={pillar.id} pillar={{...pillar, customImage: `./../imgs/${index + 1}.png`}} />
+            ))}
+        </div>
+    </div>
+</section>
 
             {/* Impact Stories Section */}
             <div className="max-w-6xl mx-auto mt-12 py-8">
