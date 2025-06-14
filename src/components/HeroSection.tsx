@@ -3,7 +3,7 @@ import React from 'react';
 
 const HeroSection = () => {
   return (
-    <div className="relative mt-4 mb-8 bg-gep-hero text-white rounded-2xl overflow-hidden shadow-2xl ">
+    <div className="relative mt-4 mb-6 bg-gep-hero text-white rounded-2xl overflow-hidden shadow-2xl ">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/5 rounded-full animate-float"></div>
@@ -22,7 +22,7 @@ const HeroSection = () => {
           </p>
         </div>
         
-        <div className="flex flex-wrap justify-center gap-6 animate-slide-up">
+        {/* <div className="flex flex-wrap justify-center gap-6 animate-slide-up">
           <div className="bg-white/15 backdrop-blur-md rounded-2xl px-8 py-6 text-center transform hover:scale-105 transition-all duration-300 hover:bg-white/20 shadow-lg">
             <p className="text-3xl md:text-4xl font-bold font-poppins animate-count-up">193+</p>
             <p className="text-sm md:text-base font-inter mt-2 opacity-90">Countries</p>
@@ -35,7 +35,7 @@ const HeroSection = () => {
             <p className="text-3xl md:text-4xl font-bold font-poppins animate-count-up" style={{ animationDelay: '0.4s' }}>84M+</p>
             <p className="text-sm md:text-base font-inter mt-2 opacity-90">Teachers</p>
           </div>
-        </div>
+        </div> */}
       </div>
       
       {/* Decorative SVG - simplified */}

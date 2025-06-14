@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { BookOpen, Building, ChevronDown, ExternalLink, ArrowLeft, Leaf, Users, Globe, Target, FileText } from 'lucide-react';
+import React, { useState } from 'react';
+import { BookOpen, Building, ChevronDown, ExternalLink, ArrowLeft, Leaf, Users, Globe, Target, FileText, Award, Link2, Net } from 'lucide-react';
+import pillar1_image from '../imgs/pillar1.png';
+import pillar2_image from '../imgs/pillar2.png';
+import pillar3_image from '../imgs/pillar3.png';
+import pillar4_image from '../imgs/pillar4.png';
+import { useParams } from 'react-router-dom';
 
 // --- MOCK DATA ---
-// Based on the provided Word documents and visual guide.
+// Updated with all data points from the (UAE) Country_Profile_Form_Dashboard.docx file.
 const countryData = {
   uae: {
     id: 'uae',
@@ -10,340 +15,339 @@ const countryData = {
     isGEPMember: true,
     gepMemberOrganizations: [
       "NCS", "Shining Star International School", "ICS School Mushrif", "Higher Colleges of Technology", "PraeEminere Advisory", "baseet", "UNICEF UAE", "Ajms Global", "ASCS", "Dubai Cares", "EAD", "Eduvate", "EmiratesGBC", "PwC", "Greeneration", "American Community School of Abu Dhabi", "American School of Dubai", "Arbor School", "Citizens School", "Clarion School Dubai", "Gems Cambridge International Private School", "PLANETGREENERS", "Pristine Private School", "Regent International School", "Sustainability Tribe", "Emirates Schools Establishment", "Gulf Medical University", "GEMS Founders School, Masdar City - Abu Dhabi", "Gems Wellington International School", "DP World", "Kings' School Al Barsha", "Terrain Floorings", "Dar Al Marefa", "City University Ajman", "GEMS Founders Al Mizhar", "Ajman University", "Al Ain University", "ESE", "GEMS Education", "Tadweera for Green Education"
-    ],
+    ].filter((value, index, self) => self.indexOf(value) === index),
     pillar1: {
       greenSchoolsCount: 139,
-      countryResponse: "[The country will provide a text response based on this pillar. We welcome you to update as you see fit.]",
+      accreditationScheme: {
+        status: "Yes",
+        schemes: ["The Sustainable Schools Accreditation", "The Sustainable Campus Accreditation", "The Eco-School Model", "The Eco-Campus (to be implemented in 2023)"]
+      },
+      awardScheme: { status: "Yes" },
+      schoolNetwork: { status: "No" },
+      countryResponse: "The Sustainable schools Initiative is an internationally recognized environmental initiative in partnership with the Department of Education and Knowledge (ADEK), Ministry of Education, and sponsored by Bp, allowing youth to explore the environment and learn ways to reduce their ecological footprint, while creating a sense of ownership and responsibility towards the future by addressing their own environmental impact. SSI is one of our Environmental Education flagship projects due to its quest to promote environmental sustainability addressing school communities. https://sustainableschools.ead.ae/SSI/",
     },
     pillar2: {
       isClimateEducationInCurriculum: "Not available or data not reviewed",
       mecceGemrLink: "https://education-profiles.org/northern-africa-and-western-asia/united-arab-emirates/~climate-change-communication-and-education",
-      countryResponse: "[The country will provide a text response based on this pillar. We invite you to provide any more information that you have done regarding greening the curriculum or teaching learning materials and syllabus.]"
+      countryResponse: "We have developed a cross-curriculum framework which tackles 23 different curriculums with 4 different topics: Energy Biodiversity and Biosphere Climate Change and consumption Innovation and sustainability. The Ministry of Education has committed to implement the Green Education Partnership in the UAE and aims to implement the cross-curriculum framework in all UAE schools."
     },
     pillar3: {
       isEducationInNDC: "Yes",
       ndcLink: "https://unfccc.int/sites/default/files/2024-11/UAE-NDC3.0.pdf",
-      ndcResponse: "[The country will provide a text response based on this pillar. We invite you to provide any further information that you have done regarding policy or action plans focused on education for sustainable development.]",
+      ndcEarthDayLink: "https://www.earthday.org/ndc-tracker/#category2",
+      ndcResponse: "In 2022, Minister of Education has committed to implement the Green Education Partnership in the UAE. Since then, the Ministry of Education has designed and developed a framework and roadmap to achieve all the Green Pillars KPI by the end of the COP 28.",
       isClimateEducationInESP: "Not available or data not reviewed",
-      espBestPractices: "[This is a TEXT space for best practices from IIEP’s analysis on ESPs. This review will be done by UNESCO IIEP and is not yet done.]"
+      espBestPractices: "[Analysis to be done by UNESCO IIEP]"
     },
     pillar4: {
       citiesWithLifelongLearningProgramsCount: 1,
+      learningCities: ["Ras Al Khaimah"],
       unescoLearningCitiesLink: "https://www.uil.unesco.org/en/learning-cities/map?fq%5Bsm_unsc_field_ref_countries_label%5D%5B%5D=United+Arab+Emirates",
-      countryResponse: "[The country will provide a text response based on this pillar. We welcome you to update as you see fit.]"
+      countryResponse: "We are developing policies and guidelines by building different abstract community engagement model for all Emirates."
     },
-    impactStoriesBestPractices: "Impact stories: for example link to MOCCAE News | Media Center | UAE Ministry of Climate Change and Environment"
+    impactStoriesBestPractices: "For example link to MOCCAE News | Media Center | UAE Ministry of Climate Change and Environment"
   },
-  albania: {
-    id: 'albania',
+  al: {
+    id: 'al',
     name: 'Albania',
-    isGEPMember: false,
-    gepMemberOrganizations: [],
+    isGEPMember: true,
+    gepMemberOrganizations: [
+      "NCS", "Shining Star International School", "ICS School Mushrif", "Higher Colleges of Technology", "PraeEminere Advisory", "baseet", "UNICEF UAE", "Ajms Global", "ASCS", "Dubai Cares", "EAD", "Eduvate", "EmiratesGBC", "PwC", "Greeneration", "American Community School of Abu Dhabi", "American School of Dubai", "Arbor School", "Citizens School", "Clarion School Dubai", "Gems Cambridge International Private School", "PLANETGREENERS", "Pristine Private School", "Regent International School", "Sustainability Tribe", "Emirates Schools Establishment", "Gulf Medical University", "GEMS Founders School, Masdar City - Abu Dhabi", "Gems Wellington International School", "DP World", "Kings' School Al Barsha", "Terrain Floorings", "Dar Al Marefa", "City University Ajman", "GEMS Founders Al Mizhar", "Ajman University", "Al Ain University", "ESE", "GEMS Education", "Tadweera for Green Education"
+    ].filter((value, index, self) => self.indexOf(value) === index),
     pillar1: {
       greenSchoolsCount: 0,
-      countryResponse: "[The country will provide a text response based on this pillar.]"
+      accreditationScheme: {
+        status: "No",
+        // schemes: ["The Sustainable Schools Accreditation", "The Sustainable Campus Accreditation", "The Eco-School Model", "The Eco-Campus (to be implemented in 2023)"]
+      },
+      awardScheme: { status: "No" },
+      schoolNetwork: { status: "No" },
+      countryResponse: "The Sustainable schools Initiative is an internationally recognized environmental initiative in partnership with the Department of Education and Knowledge (ADEK), Ministry of Education, and sponsored by Bp, allowing youth to explore the environment and learn ways to reduce their ecological footprint, while creating a sense of ownership and responsibility towards the future by addressing their own environmental impact. SSI is one of our Environmental Education flagship projects due to its quest to promote environmental sustainability addressing school communities. https://sustainableschools.ead.ae/SSI/",
     },
     pillar2: {
-      isClimateEducationInCurriculum: "No",
-      mecceGemrLink: null,
-      countryResponse: "[The country will provide a text response based on this pillar.]"
+      isClimateEducationInCurriculum: "Not available or data not reviewed",
+      mecceGemrLink: "https://education-profiles.org/northern-africa-and-western-asia/united-arab-emirates/~climate-change-communication-and-education",
+      countryResponse: "We have developed a cross-curriculum framework which tackles 23 different curriculums with 4 different topics: Energy Biodiversity and Biosphere Climate Change and consumption Innovation and sustainability. The Ministry of Education has committed to implement the Green Education Partnership in the UAE and aims to implement the cross-curriculum framework in all UAE schools."
     },
     pillar3: {
-      isEducationInNDC: "Not available or data not reviewed",
-      ndcLink: null,
-      ndcResponse: "[The country will provide a text response based on this pillar.]",
+      isEducationInNDC: "Yes",
+      ndcLink: "https://unfccc.int/sites/default/files/2024-11/UAE-NDC3.0.pdf",
+      ndcEarthDayLink: "https://www.earthday.org/ndc-tracker/#category2",
+      ndcResponse: "In 2022, Minister of Education has committed to implement the Green Education Partnership in the UAE. Since then, the Ministry of Education has designed and developed a framework and roadmap to achieve all the Green Pillars KPI by the end of the COP 28.",
       isClimateEducationInESP: "Not available or data not reviewed",
-      espBestPractices: "[This is a TEXT space for best practices from IIEP’s analysis on ESPs. This review will be done by UNESCO IIEP and is not yet done.]"
+      espBestPractices: "[Analysis to be done by UNESCO IIEP]"
     },
     pillar4: {
-      citiesWithLifelongLearningProgramsCount: "Not available or data not reviewed",
-      unescoLearningCitiesLink: null,
-      countryResponse: "[The country will provide a text response based on this pillar.]"
+      citiesWithLifelongLearningProgramsCount: 1,
+      learningCities: ["Ras Al Khaimah"],
+      unescoLearningCitiesLink: "https://www.uil.unesco.org/en/learning-cities/map?fq%5Bsm_unsc_field_ref_countries_label%5D%5B%5D=United+Arab+Emirates",
+      countryResponse: "We are developing policies and guidelines by building different abstract community engagement model for all Emirates."
     },
-    impactStoriesBestPractices: "[Please share impact stories or best practices including external links of work partners are doing in your country.]"
+    impactStoriesBestPractices: "For example link to MOCCAE News | Media Center | UAE Ministry of Climate Change and Environment"
   }
 };
 
 const getCountryProfileById = (id) => countryData[id] || null;
 
-
 // --- HELPER & UI COMPONENTS ---
-const Card = ({ children, className = '' }) => (
-  <div className={`bg-white rounded-xl shadow-sm border border-gray-200/80 p-6 flex flex-col ${className}`}>
+const Card = ({ children, className = '', isHoverable = false }) => (
+  <div className={`bg-white rounded-2xl shadow-sm border border-gray-200/60 p-6 flex flex-col h-full transition-all duration-300 ${isHoverable ? 'hover:shadow-lg hover:scale-[1.02]' : ''} ${className}`}>
     {children}
   </div>
 );
 
-const StatusBadge = ({ status }) => {
+const StatusBadge = ({ status, className = '' }) => {
   const normalizedStatus = typeof status === 'string' ? status.toLowerCase() : 'data not reviewed';
-  let bgColor = 'bg-gray-100 text-gray-700';
+  let bgColor = 'bg-gray-100 text-gray-800';
   let dotColor = 'bg-gray-400';
 
   if (normalizedStatus === 'yes') {
-    bgColor = 'bg-emerald-50 text-emerald-800';
-    dotColor = 'bg-emerald-500';
+    bgColor = 'bg-green-100 text-green-900';
+    dotColor = 'bg-green-500';
   } else if (normalizedStatus === 'no') {
-    bgColor = 'bg-red-50 text-red-800';
+    bgColor = 'bg-red-100 text-red-900';
     dotColor = 'bg-red-500';
   }
 
   return (
-    <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold ${bgColor}`}>
-      <span className={`w-2 h-2 mr-3 rounded-full ${dotColor}`}></span>
+    <div className={`inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold ${bgColor} ${className}`}>
+      <span className={`w-2.5 h-2.5 mr-3 rounded-full ${dotColor}`}></span>
       {status}
     </div>
   );
 };
 
-const CountryResponseBox = ({ text }) => (
-  <div className="mt-4 p-4 bg-gray-50/80 border-l-4 border-teal-600 rounded-r-lg flex-grow">
-    <p className="text-gray-600 italic text-sm">{text}</p>
+const CountryResponseBox = ({ text, className = '' }) => (
+  <div className={`mt-4 p-4 bg-slate-50 rounded-r-lg ${className}`}>
+    <p className="text-gray-700 italic text-sm">{text}</p>
   </div>
 );
 
 const LinkButton = ({ href, text, icon: Icon }) => (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm text-teal-700 hover:text-teal-900 font-semibold">
-        <Icon size={14} className="mr-1.5" />
-        {text}
-        <ExternalLink size={14} className="ml-1.5" />
+    <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm text-teal-600 hover:text-teal-800 font-semibold transition-colors group">
+        <Icon size={16} className="mr-2 text-teal-500" />
+        <span className="group-hover:underline">{text}</span>
+        <ExternalLink size={14} className="ml-1.5 opacity-70 group-hover:opacity-100" />
     </a>
 );
-
 
 // --- MAIN PAGE SECTIONS ---
 
-const CountryProfileHeader = ({ countryName }) => (
-  <header className="mb-10">
-    <a href="/countries" className="inline-flex items-center text-sm text-teal-700 hover:text-teal-900 mb-4 transition-colors">
-      <ArrowLeft size={16} className="mr-2" />
-      Back to Countries List
-    </a>
-    <h1 className="text-4xl md:text-5xl font-bold text-gray-800">{countryName}</h1>
-  </header>
-);
-
-const Pillar1Card = ({ data }) => (
-  <Card id="pillar-1">
-  <div className="flex items-start mb-4">
-    <div className="bg-teal-100 p-3 rounded-full mr-4">
-      <Building className="text-teal-700" size={24} />
+const CountryProfileHeader = ({ countryName, isMember }) => (
+  <div className="relative bg-gradient-to-br from-teal-600 to-green-600 text-white rounded-3xl p-8 md:p-12 mb-12 overflow-hidden">
+    <div className="absolute inset-0 bg-black/10"></div>
+    <div className="relative z-10">
+        <a href="#" onClick={(e) => e.preventDefault()} className="inline-flex items-center text-sm text-white/80 hover:text-white mb-6 transition-colors">
+            <ArrowLeft size={16} className="mr-2" />
+            Back to Countries List
+        </a>
+        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">{countryName}</h1>
     </div>
-    <div>
-      <h3 className="text-xl font-bold text-gray-800">Pillar 1: Greening Schools</h3>
-      <p className="text-xs text-gray-500 flex items-center mt-1">
-        <Target size={12} className="mr-1.5" /> Target: 50% of schools greened.
-      </p>
-    </div>
-  </div>
-  <div className="text-center my-6 flex-grow">
-    <p className="text-6xl font-extrabold text-teal-600">
-      {typeof data.greenSchoolsCount === 'number'
-        ? data.greenSchoolsCount.toLocaleString()
-        : data.greenSchoolsCount}
-    </p>
-    <p className="text-sm text-gray-500 mt-1">Number of Green Schools</p>
-  </div>
-  <div className="mb-4">
-    <p className="text-sm font-medium text-gray-600 mb-2">
-      Does the country have an accreditation scheme to recognize school’s
-      outstanding work on sustainability and climate change?
-    </p>
-    <StatusBadge status="Yes" />
-    <ul className="list-disc list-inside text-sm text-gray-600 mt-2 pl-4">
-      <li>The Sustainable Schools Accreditation</li>
-      <li>The Sustainable Campus Accreditation</li>
-      <li>The Eco-School Model</li>
-      <li>The Eco-Campus (to be implemented in 2023)</li>
-    </ul>
-  </div>
-  <div className="mb-4">
-    <p className="text-sm font-medium text-gray-600 mb-2">
-      Does the country have an award to recognize school’s outstanding work on
-      sustainability and climate change?
-    </p>
-    <StatusBadge status="Yes" />
-  </div>
-  <div className="mb-4">
-    <p className="text-sm font-medium text-gray-600 mb-2">
-      Does the country have a network of schools dedicated to sustainability
-      and climate change?
-    </p>
-    <StatusBadge status="No" />
-  </div>
-  <div>
-    <CountryResponseBox
-      text="The Sustainable schools Initiative is an internationally recognized environmental initiative in partnership with the Department of Education and Knowledge (ADEK), Ministry of Education, and sponsored by Bp, allowing youth to explore the environment and learn ways to reduce their ecological footprint, while creating a sense of ownership and responsibility towards the future by addressing their own environmental impact. SSI is one of our Environmental Education flagship projects due to its quest to promote environmental sustainability addressing school communities. https://sustainableschools.ead.ae/SSI/"
-    />
-  </div>
-</Card>
-);
-
-const Pillar2Card = ({ data }) => (
-  <Card id="pillar-2">
-    <div className="flex items-start mb-4">
-      <div className="bg-teal-100 p-3 rounded-full mr-4">
-        <BookOpen className="text-teal-700" size={24} />
-      </div>
-      <div>
-        <h3 className="text-xl font-bold text-gray-800">Pillar 2: Greening Curriculum</h3>
-        <p className="text-xs text-gray-500 flex items-center mt-1"><Target size={12} className="mr-1.5"/> Target: 90% of countries green curriculum.</p>
-      </div>
-    </div>
-    <div className="my-6 space-y-4 flex-grow">
-      <div>
-        <p className="text-sm font-medium text-gray-600 mb-2">Climate Education in Curriculum? (GEMR Review)</p>
-        <StatusBadge status={data.isClimateEducationInCurriculum} />
-      </div>
-      {data.mecceGemrLink && (
-        <LinkButton href={data.mecceGemrLink} text="View MECCE/GEMR Profile" icon={ExternalLink} />
-      )}
-    </div>
-    <div>
-        <h4 className="font-semibold text-gray-700">Country Activities:</h4>
-        <CountryResponseBox text={data.countryResponse} />
-    </div>
-  </Card>
-);
-
-const Pillar3Card = ({ data }) => (
-  <Card id="pillar-3">
-    <div className="flex items-start mb-4">
-      <div className="bg-teal-100 p-3 rounded-full mr-4">
-        <Users className="text-teal-700" size={24} />
-      </div>
-      <div>
-        <h3 className="text-xl font-bold text-gray-800">Pillar 3: Teacher Training & Capacities</h3>
-        <p className="text-xs text-gray-500 flex items-center mt-1"><Target size={12} className="mr-1.5"/> Target: 50% of countries have education in NDCs.</p>
-      </div>
-    </div>
-    <div className="space-y-6 mt-6 flex-grow">
-      <div className="p-4 border rounded-lg bg-gray-50/50">
-        <p className="text-sm font-medium text-gray-600 mb-2">Is education reflected in NDCs?</p>
-        <div className='flex items-center justify-between'>
-            <StatusBadge status={data.isEducationInNDC} />
-            {data.ndcLink && <LinkButton href={data.ndcLink} text="Link to NDC" icon={FileText} />}
+    {isMember && (
+        <div className="absolute top-8 right-8 z-10 bg-white/20 backdrop-blur-sm text-white text-base font-semibold px-5 py-2.5 rounded-full inline-flex items-center border border-white/30">
+            <Leaf size={18} className="mr-2.5" />
+            GEP Member
         </div>
-        <h5 className="font-semibold text-gray-700 mt-4 text-sm">Country Response on NDCs:</h5>
-        <CountryResponseBox text={data.ndcResponse} />
-      </div>
-      <div className="p-4 border rounded-lg bg-gray-50/50">
-        <p className="text-sm font-medium text-gray-600 mb-2">Is climate education in Education Sector Plans? (IIEP Review)</p>
-        <StatusBadge status={data.isClimateEducationInESP} />
-        <h5 className="font-semibold text-gray-700 mt-4 text-sm">Best Practices from ESPs:</h5>
-        <CountryResponseBox text={data.espBestPractices} />
-      </div>
-    </div>
-  </Card>
+    )}
+  </div>
 );
 
-const Pillar4Card = ({ data }) => (
-    <Card id="pillar-4">
-      <div className="flex items-start mb-4">
-        <div className="bg-teal-100 p-3 rounded-full mr-4">
-          <Globe className="text-teal-700" size={24} />
-        </div>
-        <div>
-          <h3 className="text-xl font-bold text-gray-800">Pillar 4: Greening Communities</h3>
-          <p className="text-xs text-gray-500 flex items-center mt-1"><Target size={12} className="mr-1.5"/> Target: 20% of cities have a lifelong learning programme.</p>
-        </div>
-      </div>
-      <div className="text-center my-6 flex-grow">
-        <p className="text-6xl font-extrabold text-teal-600">{typeof data.citiesWithLifelongLearningProgramsCount === 'number' ? data.citiesWithLifelongLearningProgramsCount.toLocaleString() : data.citiesWithLifelongLearningProgramsCount}</p>
-        <p className="text-sm text-gray-500 mt-1">Cities with at least one programme</p>
-      </div>
-      <div>
-         {data.unescoLearningCitiesLink && (
-            <div className="mb-4">
-                <LinkButton href={data.unescoLearningCitiesLink} text="Link to UNESCO Learning Cities" icon={ExternalLink} />
+const PillarCard = ({ imageSrc, title, children, color }) => (
+    <Card isHoverable={true}>
+        <div className="flex items-center mb-5">
+            <div className="bg-white p-2 rounded-2xl mr-5 shadow-sm">
+                <img 
+                    src={imageSrc} 
+                    alt={`${title} icon`} 
+                    className="w-16 h-16 object-contain"
+                    onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/64x64/eee/ccc?text=Img`; }}
+                />
             </div>
-          )}
-        <h4 className="font-semibold text-gray-700">Country Activities:</h4>
-        <CountryResponseBox text={data.countryResponse} />
-      </div>
+            <h3 className="text-2xl font-bold tracking-tight" style={{ color: color }}>{title}</h3>
+        </div>
+        <div className="flex flex-col flex-grow mt-2">
+            {children}
+        </div>
     </Card>
 );
 
-const GepMembershipCard = ({ isMember, organizations }) => (
-  <Card id="gep-membership">
-    <div className="flex items-center mb-4">
-        <div className="bg-green-100 p-3 rounded-full mr-4">
-            <Leaf className="text-green-700" size={24}/>
-        </div>
-        <h3 className="text-xl font-bold text-gray-800">GEP Membership</h3>
-    </div>
-    <div className="mb-4">
-      <p className="text-sm font-medium text-gray-600 mb-2">Is this country a GEP Member?</p>
-      <StatusBadge status={isMember ? 'Yes' : 'No'} />
-    </div>
-    {isMember && organizations.length > 0 && (
-      <div>
-        <p className="text-sm font-medium text-gray-600 mb-2">GEP Member Organizations in this Country ({organizations.length})</p>
+const Pillar1Card = ({ data }) => {
+    const color = "#6FAC44";
+    return (
+        <PillarCard 
+            imageSrc= {pillar1_image}
+            title="Greening Schools" 
+            color={color}
+        >
+            <div className="text-center my-6">
+                <p className="text-7xl font-extrabold" style={{ color: color }}>
+                    {data.greenSchoolsCount.toLocaleString()}
+                </p>
+                <p className="text-base text-gray-500 mt-2 font-medium">Number of Green Schools</p>
+            </div>
+            <div className="space-y-4 mb-6">
+                <div className="flex items-center justify-between">
+                    <p className="text-sm font-medium text-gray-600">Accreditation Scheme?</p>
+                    <StatusBadge status={data.accreditationScheme.status} />
+                </div>
+                <div className="flex items-center justify-between">
+                    <p className="text-sm font-medium text-gray-600">Award Scheme?</p>
+                    <StatusBadge status={data.awardScheme.status} />
+                </div>
+                <div className="flex items-center justify-between">
+                    <p className="text-sm font-medium text-gray-600">School Network?</p>
+                    <StatusBadge status={data.schoolNetwork.status} />
+                </div>
+            </div>
+            <CountryResponseBox text={data.countryResponse} />
+        </PillarCard>
+    );
+};
+
+const Pillar2Card = ({ data }) => {
+    const color = "#5DAF8B";
+    return (
+        <PillarCard 
+            imageSrc= {pillar2_image}
+            title="Greening Curriculum"
+            color={color}
+        >
+            <div className="my-6 space-y-5">
+                <div>
+                    <p className="text-sm font-medium text-gray-600 mb-2.5">Climate education in curriculum?</p>
+                    <StatusBadge status={data.isClimateEducationInCurriculum} />
+                </div>
+                {data.mecceGemrLink && (
+                <LinkButton href={data.mecceGemrLink} text="View MECCE/GEMR Profile" icon={Link2} />
+                )}
+            </div>
+            <CountryResponseBox text={data.countryResponse} />
+        </PillarCard>
+    );
+};
+
+const Pillar3Card = ({ data }) => {
+    const color = "#085658";
+    return (
+        <PillarCard 
+            imageSrc= {pillar3_image}
+            title="Teacher Capacity"
+            color={color}
+        >
+            <div className="space-y-5 mt-6">
+                <div>
+                    <p className="text-sm font-medium text-gray-600 mb-2.5">Education in NDCs?</p>
+                    <StatusBadge status={data.isEducationInNDC} />
+                     <div className="mt-4 space-y-2">
+                        {data.ndcLink && <LinkButton href={data.ndcLink} text="Country NDC Document" icon={FileText} />}
+                        {data.ndcEarthDayLink && <LinkButton href={data.ndcEarthDayLink} text="EarthDay.org NDC Analysis" icon={FileText} />}
+                    </div>
+                </div>
+                <div>
+                    <p className="text-sm font-medium text-gray-600 mb-2.5">Climate education in ESPs?</p>
+                    <StatusBadge status={data.isClimateEducationInESP} />
+                </div>
+            </div>
+            <CountryResponseBox text={data.ndcResponse} />
+        </PillarCard>
+    );
+};
+
+const Pillar4Card = ({ data }) => {
+    const color = "#56813A";
+    return (
+        <PillarCard
+            imageSrc= {pillar4_image}
+            title="Greening Communities"
+            color={color}
+        >
+            <div className="text-center my-6">
+                <p className="text-7xl font-extrabold" style={{ color: color }}>
+                  {data.citiesWithLifelongLearningProgramsCount}
+                </p>
+                <p className="text-base text-gray-500 mt-2 font-medium">Cities with Lifelong Learning</p>
+                 <p className="text-sm text-gray-500 mt-1">({data.learningCities.join(', ')})</p>
+            </div>
+            {data.unescoLearningCitiesLink && (
+                <div className="mb-4">
+                    <LinkButton href={data.unescoLearningCitiesLink} text="UNESCO Learning Cities Network" icon={Link2} />
+                </div>
+            )}
+            <CountryResponseBox text={data.countryResponse} />
+        </PillarCard>
+    );
+};
+
+const GepMemberListCard = ({ organizations }) => (
+    <Card id="gep-membership-list" className="bg-gradient-to-br from-green-50 to-teal-50">
+        <h3 className="text-2xl font-bold text-gray-800 mb-2">GEP Member Organizations ({organizations.length})</h3>
+        <p className="text-sm text-gray-600 mb-5">List of official Greening Education Partnership member organizations in this country.</p>
+
+        {organizations.length > 0 && (
         <details className="group">
-          <summary className="flex items-center justify-between p-3 bg-gray-100 rounded-lg cursor-pointer hover:bg-gray-200 transition-colors">
-            <span className="font-semibold text-gray-800">View Member Organizations</span>
+          <summary className="flex items-center justify-between p-4 bg-white/70 rounded-xl cursor-pointer hover:bg-white transition-colors shadow-sm">
+            <span className="font-semibold text-gray-800">View Member List</span>
             <ChevronDown size={20} className="text-gray-600 group-open:rotate-180 transition-transform" />
           </summary>
-          <ul className="mt-2 p-3 max-h-60 overflow-y-auto border rounded-lg bg-white">
+          <ul className="mt-3 p-3 max-h-80 overflow-y-auto border rounded-lg bg-white/80 space-y-1">
             {organizations.map((org, index) => (
-              <li key={index} className="text-sm text-gray-700 py-1.5 px-2 hover:bg-gray-50 rounded">
+              <li key={index} className="text-sm text-gray-800 py-2 px-3 hover:bg-white/90 rounded-md font-medium">
                 {org}
               </li>
             ))}
           </ul>
         </details>
-      </div>
-    )}
-  </Card>
+        )}
+    </Card>
 );
 
-const BestPracticesCard = ({ text }) => (
-    <Card id="best-practices">
-        <h3 className="text-xl font-bold text-gray-800 mb-2">Spotlights of Partner Work</h3>
-        <p className="text-sm text-gray-500 mb-4">This space will be built out to include stories from partner data and directly from the country. This area will include links to impact stories and best practices, as well as external sites, partner reports.</p>
-        <CountryResponseBox text={text} />
+const SpotlightsCard = ({ text }) => (
+    <Card id="best-practices" className="h-full bg-slate-800 text-white">
+        <h3 className="text-2xl font-bold mb-3 tracking-tight">Spotlights of Partner Work</h3>
+        <div className="flex-grow">
+            <p className="text-slate-300 mb-4">This space will be built out to include stories from partner data and directly from the country, including links to impact stories, best practices, partner reports, and external sites.</p>
+        </div>
+        <div className={`mt-auto p-4 bg-slate-700 border-l-4 border-teal-400 rounded-r-lg`}>
+          <p className="text-slate-200 italic text-sm">{text}</p>
+        </div>
     </Card>
 );
 
 // --- THE MAIN PAGE COMPONENT ---
-export default function App() {
-    const [countryId, setCountryId] = useState('uae'); 
-    const country = getCountryProfileById(countryId);
-    
+export default function CountryProfilePage() {
+    // We assume the country is passed as a prop or determined by the URL.
+    // For this demo, we'll hardcode it to 'uae'.
+    const { id } = useParams<{ id: string }>();
+    const countryId = id as string;
+    const country = countryId && countryData[countryId] ? countryData[countryId] : null;
+    // const countryStories = countryId && countryImpactStories[countryId] ? countryImpactStories[countryId] : [];
+
+
     if (!country) {
-        return (
-            <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-                <Card className="text-center max-w-lg">
-                    <h1 className="text-2xl font-bold text-red-600 mb-3">Country Not Found</h1>
-                    <p className="text-gray-600 mb-6">
-                        Sorry, we couldn't find data for the country ID "{countryId}".
-                    </p>
-                    <a href="#" className="inline-flex items-center px-6 py-2 bg-teal-600 text-white font-semibold rounded-lg shadow-sm hover:bg-teal-700 transition-colors">
-                        <ArrowLeft size={16} className="mr-2" />
-                        Back to Countries List
-                    </a>
-                     <div className="mt-4 text-xs">
-                        <button onClick={() => setCountryId('uae')} className="text-teal-600 hover:underline p-1">Load UAE Data</button> |
-                        <button onClick={() => setCountryId('albania')} className="text-teal-600 hover:underline p-1">Load Albania Data</button>
-                    </div>
-                </Card>
-            </div>
-        );
+        // This would be replaced with a proper 404 page in a real app
+        return <div className="p-8 font-bold text-red-500">Country not found!</div>
     }
     
     return (
-        <div className="min-h-screen bg-gray-50 font-sans">
-            <div className="container mx-auto px-4 py-10">
+        <div className="min-h-screen bg-slate-50 font-sans">
+            <div className="container mx-auto px-4 lg:px-8 py-12">
+                <CountryProfileHeader countryName={country.name} isMember={country.isGEPMember} />
+
                 <main>
-                    <CountryProfileHeader countryName={country.name} />
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mb-8">
                         <Pillar1Card data={country.pillar1} />
                         <Pillar2Card data={country.pillar2} />
                         <Pillar3Card data={country.pillar3} />
                         <Pillar4Card data={country.pillar4} />
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <GepMembershipCard isMember={country.isGEPMember} organizations={country.gepMemberOrganizations} />
-                        <BestPracticesCard text={country.impactStoriesBestPractices} />
+                    
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div className="lg:col-span-2">
+                           <SpotlightsCard text={country.impactStoriesBestPractices} />
+                        </div>
+                        <div>
+                           {country.isGEPMember && <GepMemberListCard organizations={country.gepMemberOrganizations} />}
+                        </div>
                     </div>
                 </main>
             </div>

@@ -15,49 +15,13 @@ const countries: Country[] = [
     id: 'uae',
     name: 'United Arab Emirates',
     flag: 'https://flagcdn.com/w320/ae.png',
-    region: 'Middle East and North Africa'
+    region: 'Middle East'
   },
   {
-    id: 'morocco',
-    name: 'Morocco',
-    flag: 'https://flagcdn.com/w320/ma.png',
-    region: 'Middle East and North Africa'
-  },
-  {
-    id: 'egypt',
-    name: 'Egypt',
-    flag: 'https://flagcdn.com/w320/eg.png',
-    region: 'Middle East and North Africa'
-  },
-  {
-    id: 'jordan',
-    name: 'Jordan',
-    flag: 'https://flagcdn.com/w320/jo.png',
-    region: 'Middle East and North Africa'
-  },
-  {
-    id: 'saudi',
-    name: 'Saudi Arabia',
-    flag: 'https://flagcdn.com/w320/sa.png',
-    region: 'Middle East and North Africa'
-  },
-  {
-    id: 'qatar',
-    name: 'Qatar',
-    flag: 'https://flagcdn.com/w320/qa.png',
-    region: 'Middle East and North Africa'
-  },
-  {
-    id: 'bahrain',
-    name: 'Bahrain',
-    flag: 'https://flagcdn.com/w320/bh.png',
-    region: 'Middle East and North Africa'
-  },
-  {
-    id: 'kuwait',
-    name: 'Kuwait',
-    flag: 'https://flagcdn.com/w320/kw.png',
-    region: 'Middle East and North Africa'
+    id: 'al',
+    name: 'Albania',
+    flag: 'https://flagcdn.com/w320/al.png',
+    region: 'Southeast Europe'
   }
 ];
 

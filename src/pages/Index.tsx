@@ -201,7 +201,8 @@ const GlobalDashboard = () => {
           impactStories: [
             { title: 'Eco-Schools Lesson Plans', url: 'https://www.ecoschools.global/lesson-plans-for-teachers' },
             { title: 'Climate Change Education Research', url: 'https://www.mecce.ca/research' }
-          ]
+          ],
+          customImage: pillar1_image
         },
         {
           id: 'pillar2',
@@ -220,7 +221,8 @@ const GlobalDashboard = () => {
           impactStories: [
             { title: 'Eco-Schools Lesson Plans', url: 'https://www.ecoschools.global/lesson-plans-for-teachers' },
             { title: 'Climate Change Education Research', url: 'https://www.mecce.ca/research' }
-          ]
+          ],
+          customImage: pillar2_image
         },
         {
           id: 'pillar3',
@@ -238,7 +240,8 @@ const GlobalDashboard = () => {
            link: "/pillar/teacher-capacity",
           impactStories: [
             { title: 'Teacher Training in Egypt', url: 'http://www.wesc-eg.com/teacher-training.html' }
-          ]
+          ],
+          customImage: pillar3_image
         },
         {
           id: 'pillar4',
@@ -256,7 +259,8 @@ const GlobalDashboard = () => {
           link: "/pillar/green-communities",
           impactStories: [
             { title: 'Cairo Climate Talks', url: 'https://cairoclimatetalks.net/event/keeping-the-momentum-up-how-do-we-activate-young-people-to-save-the-planet/' }
-          ]
+          ],
+          customImage: pillar4_image
         }
     ];
 
@@ -295,8 +299,8 @@ const GlobalDashboard = () => {
     <div className="grid grid-cols-1 lg:grid-cols-7 lg:gap-8 items-start"> {/* Changed to 7 columns */}
         {/* Left Pillars - Pillar 1 and 3 - Now spans 2 columns */}
         <div className="hidden lg:flex lg:flex-col lg:col-span-2 lg:gap-8">
-            <PillarCard key={pillarData[0].id} pillar={{...pillarData[0], customImage: pillar1_image}} />
-            <PillarCard key={pillarData[2].id} pillar={{...pillarData[2], customImage: pillar3_image}} />
+            <PillarCard key={pillarData[0].id} pillar={{...pillarData[0]}} />
+            <PillarCard key={pillarData[2].id} pillar={{...pillarData[2],}} />
         </div>
 
         {/* Center Map - Reduced to 3 columns (from 5) */}
@@ -355,14 +359,14 @@ const GlobalDashboard = () => {
         
         {/* Right Pillars - Pillar 2 and 4 - Now spans 2 columns */}
         <div className="hidden lg:flex lg:flex-col lg:col-span-2 lg:gap-8">
-            <PillarCard key={pillarData[1].id} pillar={{...pillarData[1], customImage: pillar2_image}} />
-            <PillarCard key={pillarData[3].id} pillar={{...pillarData[3], customImage: pillar4_image}} />
+            <PillarCard key={pillarData[1].id} pillar={{...pillarData[1]}} />
+            <PillarCard key={pillarData[3].id} pillar={{...pillarData[3]}} />
         </div>
         
         {/* Pillars for Mobile/Tablet View */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-6 mt-8">
             {pillarData.map((pillar, index) => (
-                <PillarCard key={pillar.id} pillar={{...pillar, customImage: `./../imgs/${index + 1}.png`}} />
+                <PillarCard key={pillar.id} pillar={{...pillar}} />
             ))}
         </div>
     </div>
