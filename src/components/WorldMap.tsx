@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
@@ -145,6 +144,51 @@ const WorldMap = () => {
     navigate(`/country/${country.id}`);
   };
 
+  // Calculate tooltip position with boundary checking
+  const getTooltipPosition = (mouseX: number, mouseY: number) => {
+    const tooltipWidth = 300;
+    const tooltipHeight = 120; // Approximate height
+    const padding = 20;
+    
+    let x, y;
+    
+    // Get map container bounds
+    const mapContainer = mapRef.current;
+    if (!mapContainer) return { x: mouseX, y: mouseY };
+    
+    const containerRect = mapContainer.getBoundingClientRect();
+    const containerWidth = containerRect.width;
+    const containerHeight = containerRect.height;
+    
+    // Calculate relative position within the map container
+    const relativeX = mouseX;
+    const relativeY = mouseY;
+    
+    // Horizontal positioning
+    if (relativeX + tooltipWidth + padding > containerWidth) {
+      // Position to the left of cursor
+      x = relativeX - tooltipWidth - padding;
+    } else {
+      // Position to the right of cursor
+      x = relativeX + padding;
+    }
+    
+    // Vertical positioning
+    if (relativeY + tooltipHeight + padding > containerHeight) {
+      // Position above cursor
+      y = relativeY - tooltipHeight - padding;
+    } else {
+      // Position below cursor
+      y = relativeY + padding;
+    }
+    
+    // Ensure tooltip doesn't go outside container bounds
+    x = Math.max(padding, Math.min(x, containerWidth - tooltipWidth - padding));
+    y = Math.max(padding, Math.min(y, containerHeight - tooltipHeight - padding));
+    
+    return { x, y };
+  };
+
   useEffect(() => {
     if (mapRef.current) {
       const map = new Map({
@@ -188,7 +232,7 @@ const WorldMap = () => {
 
         const markerSymbol = {
           type: "simple-marker" as "simple-marker",
-          color: country.isIcesco ? "#ecc42d" : "#6cb154",
+          color: country.isIcesco ? "#00787D" : "#6cb154",
           outline: {
             color: [255, 255, 255, 0.7],
             width: 1
@@ -201,7 +245,7 @@ const WorldMap = () => {
           content: `
             <div>
               <p style="color: #666; font-size: 0.9em;">${country.region}</p>
-              ${country.isIcesco ? '<p style="color: #ecc42d; font-weight: bold; margin-top: 4px;">ICESCO Member Country</p>' : ''}
+              ${country.isIcesco ? '<p style="color: #00787D; font-weight: bold; margin-top: 4px;">ICESCO Member Country</p>' : ''}
               <p style="margin-top: 8px;">${country.quickFact}</p>
               <p style="margin-top: 8px; font-style: italic; color: #6cb154;">Click for detailed profile</p>
             </div>
@@ -268,6 +312,9 @@ const WorldMap = () => {
   const toggle3DMode = () => {
     setIs3DMode(prev => !prev);
   };
+
+  // Calculate tooltip position when hoveredCountry changes
+  const tooltipPos = hoveredCountry ? getTooltipPosition(tooltipPosition.x, tooltipPosition.y) : { x: 0, y: 0 };
 
   return (
     <div className="relative w-full h-[500px] bg-[#f7f9fc] rounded-xl shadow-md overflow-hidden">
@@ -358,8 +405,8 @@ const WorldMap = () => {
         <div 
           className="absolute z-50 w-[300px] bg-white rounded-lg shadow-lg p-4 border-l-4 border-[#6cb154] pointer-events-none transform transition-opacity duration-200"
           style={{ 
-            left: `${Math.min(tooltipPosition.x + 20, window.innerWidth - 320)}px`, 
-            top: `${Math.min(tooltipPosition.y - 30, 400)}px`,
+            left: `${tooltipPos.x}px`, 
+            top: `${tooltipPos.y}px`,
             opacity: hoveredCountry ? 1 : 0 
           }}
         >
@@ -394,7 +441,7 @@ const WorldMap = () => {
           <span className="text-gray-700">UNESCO Greening Education Map {is3DMode ? '(3D)' : '(2D)'}</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-[#ecc42d]"></span>
+          <span className="w-3 h-3 rounded-full bg-[#00787D]"></span>
           <span className="text-gray-700">ICESCO Member Countries</span>
         </div>
         <div className="flex items-center gap-2">

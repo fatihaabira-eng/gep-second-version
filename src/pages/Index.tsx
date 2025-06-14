@@ -25,13 +25,6 @@ import pillar4_image from '../imgs/pillar4.png';
  * @param {string} props.link - The URL for the "Learn More" button.
  * @param {string} props.unit - The unit for the displayed values (e.g., "schools", "countries").
  */
-// Helper to map pillar IDs to Lucide React icons
-const pillarIcons: Record<string, React.ElementType> = {
-  'pillar1': School, // Greening Schools
-  'pillar2': BookOpen, // Greening Curriculum
-  'pillar3': Users, // Teacher Capacity
-  'pillar4': Building, // Greening Communities
-};
 
 const PillarCard = ({ pillar }) => {
   const percentage = pillar.total > 0 ? (pillar.current / pillar.total) * 100 : 0;
@@ -197,7 +190,7 @@ const GlobalDashboard = () => {
           guidanceLink: 'https://unesdoc.unesco.org/ark:/48223/pf0000390028',
           guidanceBlurb: 'The Green school quality standard aims to harmonize accreditation criteria for schools committed to sustainability through a whole institution approach to ESD. It targets accreditation scheme organizers, including civil society-led networks, international associations and governments, providing recognition for schools\' climate education efforts. The standard also aims to support education authorities and policymakers. To meet the standard, accreditation schemes must incorporate at least one-third of suggested activities in governance, facilities, teaching, and community engagement.',
           workingGroupUpdate: 'GEP Working Group 1 is actively developing resources and strategies to support the greening of schools globally, focusing on accreditation criteria and best practices.',
-           link: "/pillar/green-schools",
+          link: "/pillar/green-schools",
           impactStories: [
             { title: 'Eco-Schools Lesson Plans', url: 'https://www.ecoschools.global/lesson-plans-for-teachers' },
             { title: 'Climate Change Education Research', url: 'https://www.mecce.ca/research' }
