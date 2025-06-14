@@ -149,26 +149,28 @@ const GlobalDashboard = () => {
     }
   }, [searchTerm]);
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    console.log(value)
-    setSearchTerm(value);
-  
-    if (value.trim() === "") {
-      setSuggestions([]);
-      return;
+  const handleSearchChange = (e) => {
+        const value = e.target.value;
+        setSearchTerm(value);
+    
+        if (value.trim() === "") {
+          setSuggestions(countriesList); // Show all countries if search is empty
+          return;
+        }
+    
+        const filtered = countriesList.filter(country =>
+            country.name.toLowerCase().includes(value.toLowerCase()) ||
+            country.region.toLowerCase().includes(value.toLowerCase())
+        );
+        setSuggestions(filtered);
+    };
+  const handleFocus = () => {
+        setIsSearchFocused(true);
+        // Populate with all countries if search is empty and suggestions aren't already populated
+        if (searchTerm.trim() === '' && suggestions.length === 0) {
+            setSuggestions(countriesList);
+        }
     }
-
-    const filtered = countriesList.filter((country) =>
-      country.name
-        .toLowerCase()
-        .split(" ")
-        .some((word) => word.startsWith(value.toLowerCase())
-    )
-    );
-    console.log({filtered})
-    setSuggestions(filtered);
-  };
   const handleCountryClick = (countryId : string) => {
     navigate(`/country/${countryId}`);
     console.log(`Navigating to country profile for: ${countryId}`);
@@ -299,34 +301,51 @@ const GlobalDashboard = () => {
         {/* Center Map - Reduced to 3 columns (from 5) */}
         <div className="lg:col-span-3 mb-8 lg:mb-0">
             <div className="relative w-full max-w-lg mx-auto mb-6">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-                <input
-                    type="text"
-                    placeholder="Search for a country or region..."
-                    className="w-full p-3 pl-12 rounded-full border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm transition-all bg-white"
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                    onFocus={() => setIsSearchFocused(true)}
-                    onBlur={() => setTimeout(() => setIsSearchFocused(false), 150)}
-                />
-                {isSearchFocused && suggestions.length > 0 && (
-                    <ul className="absolute z-10 mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
-                        {suggestions.map((country) => (
-                            <li key={country.id} onMouseDown={() => handleCountryClick(country.name)}
-                                className="px-4 py-3 text-sm text-gray-700 hover:bg-green-50 cursor-pointer"
-                            >
-                                <span className="font-semibold">{country.name}</span>
-                                <span className="text-gray-500 ml-2">({country.region})</span>
-                            </li>
-                        ))}
-                    </ul>
-                )}
-                {isSearchFocused && searchTerm.length > 0 && suggestions.length === 0 && (
-                    <div className="absolute z-10 mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg p-4 text-gray-500">
-                        No results found.
-                    </div>
-                )}
-            </div>
+                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                            <input
+                                type="text"
+                                placeholder="Search for a country or region..."
+                                className="w-full p-3 pl-12 rounded-full border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm transition-all bg-white"
+                                value={searchTerm}
+                                onChange={handleSearchChange}
+                                onFocus={handleFocus}
+                                onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)} // Delay to allow click
+                            />
+                            {isSearchFocused && (
+                                <ul className="absolute z-10 mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                                    {suggestions.length > 0 ? (
+                                        Object.entries(
+                                            suggestions.reduce((acc, country) => {
+                                                (acc[country.region] = acc[country.region] || []).push(country);
+                                                return acc;
+                                            }, {})
+                                        )
+                                        .sort(([regionA], [regionB]) => regionA.localeCompare(regionB))
+                                        .map(([region, countries]) => (
+                                            <React.Fragment key={region}>
+                                                <li className="px-4 py-2 bg-gray-100 text-sm font-bold text-gray-600 sticky top-0">
+                                                    {region}
+                                                </li>
+                                                {countries.map(country => (
+                                                    <li 
+                                                        key={country.id} 
+                                                        onMouseDown={() => handleCountryClick(country.id)}
+                                                        className="px-4 py-3 text-sm text-gray-700 hover:bg-green-50 cursor-pointer flex justify-between items-center"
+                                                    >
+                                                        <span className="font-semibold pl-2">{country.name}</span>
+                                                    </li>
+                                                ))}
+                                            </React.Fragment>
+                                        ))
+                                    ) : searchTerm.length > 0 ? (
+                                        <li className="px-4 py-3 text-sm text-gray-500">
+                                            No results found.
+                                        </li>
+                                    ) : null}
+                                </ul>
+                            )}
+                        </div>
+       
             <div className="border-2 border-gray-200 rounded-2xl shadow-lg p-6 bg-white">
                 <WorldMap className="w-full h-auto" /> {/* Added className here */}
             </div>
