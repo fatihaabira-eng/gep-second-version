@@ -106,12 +106,12 @@ const QuickLinksSection = () => {
                         >
                             <div className="flex justify-center mb-4">
                                 <div className="bg-green-100 p-4 rounded-full">
-                                    <link.icon className="text-green-600" size={32} />
+                                    <link.icon className="text-[#6cb154]" size={32} />
                                 </div>
                             </div>
-                            <h3 className="text-lg font-bold text-gray-800 mb-2">{link.name}</h3>
+                            <h3 className="text-lg font-bold text-[#3A6A6D] mb-2">{link.name}</h3>
                             <p className="text-sm text-gray-600 mb-4">{link.description}</p>
-                            <span className="inline-flex items-center text-sm font-semibold text-green-600">
+                            <span className="inline-flex items-center text-sm font-semibold text-[#6cb154]">
                                 Go <ArrowRight className="ml-1 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                             </span>
                         </a>
@@ -121,6 +121,7 @@ const QuickLinksSection = () => {
         </section>
     );
 };
+
 const GlobalDashboard = () => {
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");

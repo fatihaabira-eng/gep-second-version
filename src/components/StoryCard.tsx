@@ -27,7 +27,7 @@ const StoryCard = ({ title, excerpt, country, date, imageUrl, url }: StoryCardPr
       )}
       <CardHeader className="pb-2">
         <div className="flex justify-between items-start">
-          <CardTitle className="text-base font-bold line-clamp-2">{title}</CardTitle>
+          <CardTitle className="text-[#3A6A6D] font-bold line-clamp-2">{title}</CardTitle>
         </div>
         <CardDescription className="flex gap-2 items-center text-xs">
           <span className="font-medium">{country}</span>
