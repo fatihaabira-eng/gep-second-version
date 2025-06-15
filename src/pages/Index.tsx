@@ -261,10 +261,10 @@ const GlobalDashboard = () => {
 
     // Placeholder data for impact stories
     const stories = [
-        { id: 1, title: "Eco-Schools Inspire Climate Action", excerpt: "See how the Eco-Schools program is empowering students globally to take charge of environmental challenges...", link: "https://www.ecoschools.global/lesson-plans-for-teachers" },
-        { id: 2, "title": "The State of Climate Change Education Research", "excerpt": "The MECCE Project takes stock of the past and looks forward to the future of climate change education.", "link": "https://mecce.ca/research/" },
-        { id: 3, "title": "Youth Voices for Climate in Cairo", "excerpt": "How do we activate young people to save the planet? A look at the discussions from the Cairo Climate Talks.", "link": "https://cairoclimatetalks.net/event/keeping-the-momentum-up-how-do-we-activate-young-people-to-save-the-planet/" }
-    ];
+        { id: 1, title: "impact story 1", excerpt: "this will link externally to different websites and partner websites...", link: "#" },
+        { id: 2, title: "impact story 2", excerpt: "this will link externally to different websites and partner websites...", link: "#" },
+        { id: 3, title: "impact story 3", excerpt: "this will link externally to different websites and partner websites...", link: "#" },
+     ];
 
     useEffect(() => {
         setTimeout(() => {

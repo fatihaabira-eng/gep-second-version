@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "react";  
 import { FiSearch, FiMenu, FiX } from "react-icons/fi";
 import { Link, useLocation } from "react-router-dom";
 import logo from "./../imgs/image.png"; // Assuming logo is placed in the public folder
@@ -22,8 +22,10 @@ interface NavItemProps {
 
 const NavItem: React.FC<NavItemProps> = ({ children, active = false, to, onClick }) => {
   return (
-    <li className={`px-4 py-2 text-lg ${
-      active ? "font-semibold text-[#6cb154] border-b-2 border-[#6cb154]" : "text-gray-600 hover:text-gray-900"
+    <li className={`px-4 py-2 text-lg transition-colors duration-200 ${
+  active
+        ? "font-semibold text-[#6cb154] border-b-2 border-[#6cb154]"
+        : "text-[#02585c] hover:text-[#6cb154]"
     }`}>
       <Link to={to} onClick={onClick} className="block w-full h-full">
         {children}
@@ -71,7 +73,7 @@ const NavBar: React.FC = () => {
                 <NavigationMenuItem>
                   <Link to="/" className={cn(
                     navigationMenuTriggerStyle(),
-                    "text-lg font-medium",
+                    "text-lg font-medium text-[#02585c] hover:text-[#6cb154] transition-colors duration-200",
                     isActive("/") ? "bg-[#6cb154]/10 text-[#6cb154] font-semibold" : ""
                   )}>
                     Dashboard
@@ -79,7 +81,7 @@ const NavBar: React.FC = () => {
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className={cn(
-                    "text-lg font-medium",
+                    "text-lg font-medium text-[#02585c] hover:text-[#6cb154] transition-colors duration-200",
                     isActive("/countries") ? "bg-[#6cb154]/10 text-[#6cb154] font-semibold" : ""
                   )}>
                     Countries
@@ -100,7 +102,7 @@ const NavBar: React.FC = () => {
                       </li>
                       <li>
                         <Link to="/countries" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-[#6cb154]/10 focus:bg-[#6cb154]/10">
-                          <div className="text-base font-medium leading-none text-[#3a6a6e]">All Countries</div>
+                          <div className="text-base font-medium leading-none text-[#3a6a6e] hover:text-[#6cb154]">All Countries</div>
                           <p className="text-sm leading-snug text-gray-500">
                             View the full list of participating countries
                           </p>
@@ -108,7 +110,7 @@ const NavBar: React.FC = () => {
                       </li>
                       <li>
                         <Link to="/countries?region=africa" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-[#6cb154]/10 focus:bg-[#6cb154]/10">
-                          <div className="text-base font-medium leading-none text-[#3a6a6e]">Middle East</div>
+                          <div className="text-base font-medium leading-none text-[#3a6a6e] hover:text-[#6cb154]">Middle East</div>
                           <p className="text-sm leading-snug text-gray-500">
                             Green education progress in African nations
                           </p>
@@ -116,7 +118,7 @@ const NavBar: React.FC = () => {
                       </li>
                       <li>
                         <Link to="/countries?region=asia" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-[#6cb154]/10 focus:bg-[#6cb154]/10">
-                          <div className="text-base font-medium leading-none text-[#3a6a6e]">Southest Europe</div>
+                          <div className="text-base font-medium leading-none text-[#3a6a6e] hover:text-[#6cb154]">Southest Europe</div>
                           <p className="text-sm leading-snug text-gray-500">
                             Green education progress in Asian nations
                           </p>
@@ -125,19 +127,10 @@ const NavBar: React.FC = () => {
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
-                {/* <NavigationMenuItem>
-                  <Link to="/resources" className={cn(
-                    navigationMenuTriggerStyle(),
-                    "text-lg font-medium",
-                    isActive("/resources") ? "bg-[#6cb154]/10 text-[#6cb154] font-semibold" : ""
-                  )}>
-                    Resources
-                  </Link>
-                </NavigationMenuItem> */}
                 <NavigationMenuItem>
-                  <Link to="/" className={cn(
+                  <Link to="/about" className={cn(
                     navigationMenuTriggerStyle(),
-                    "text-lg font-medium",
+                    "text-lg font-medium text-[#02585c] hover:text-[#6cb154] transition-colors duration-200",
                     isActive("/about") ? "bg-[#6cb154]/10 text-[#6cb154] font-semibold" : ""
                   )}>
                     About
@@ -149,22 +142,7 @@ const NavBar: React.FC = () => {
 
           {/* Right side - Search and Sign In */}
           <div className="hidden md:flex items-center">
-            {/* <div className="relative mx-4">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FiSearch className="h-6 w-6 text-gray-400" />
-              </div>
-              <input
-                type="text"
-                placeholder="Search..."
-                className="block w-full pl-11 pr-3 py-3 text-base border border-gray-300 rounded-md bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6cb154] focus:border-[#6cb154]"
-              />
-            </div> */}
-            {/* <Link
-              to="/signin"
-              className="px-5 py-3 text-base font-medium rounded-md text-white bg-[#0f7378] hover:bg-[#08565a] focus:ring-2 focus:ring-offset-2 focus:ring-[#0f7378] transition-colors"
-            >
-              Sign In
-            </Link> */}
+            {/* Additional buttons like search or sign in can go here */}
           </div>
         </div>
 
@@ -178,31 +156,6 @@ const NavBar: React.FC = () => {
               <NavItem to="/countries" active={isActive("/countries")} onClick={handleNavItemClick}>
                 Countries
               </NavItem>
-              {/* <NavItem to="/resources" active={isActive("/resources")} onClick={handleNavItemClick}>
-                Resources
-              </NavItem>
-              <NavItem to="/partners" active={isActive("/partners")} onClick={handleNavItemClick}>
-                Partners
-              </NavItem> */}
-              {/* <li className="px-4 py-2">
-                <div className="relative mb-4">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <FiSearch className="h-6 w-6 text-gray-400" />
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Search..."
-                    className="block w-full pl-11 pr-3 py-3 text-base border border-gray-300 rounded-md bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6cb154] focus:border-[#6cb154]"
-                  />
-                </div>
-                <Link 
-                  to="/signin" 
-                  onClick={handleNavItemClick}
-                  className="block w-full text-center py-3 text-base font-medium rounded-md text-white bg-[#0f7378] hover:bg-[#08565a]"
-                >
-                  Sign In
-                </Link>
-              </li> */}
             </ul>
           </div>
         )}
