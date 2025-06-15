@@ -3,7 +3,7 @@ import React from 'react';
 
 const GEPIntroSection = () => {
   return (
-    <div className="max-w-6xl mx-auto mt-8 mb-10 bg-gep-card rounded-2xl shadow-xl p-8 border-l-4  transform hover:shadow-2xl transition-all duration-300">
+    <div className="max-w-6xl mx-auto mt-2 mb-8 bg-gep-card rounded-2xl shadow-xl p-8 border-l-4  transform hover:shadow-2xl transition-all duration-300">
       <div className="flex items-start gap-4">
         {/* <div className="bg-gep-green-100 p-3 rounded-xl">
           <div className="w-6 h-6 bg-gep-green-500 rounded-full"></div>

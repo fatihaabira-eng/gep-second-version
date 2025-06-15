@@ -3,7 +3,7 @@ import React from 'react';
 
 const HeroSection = () => {
   return (
-    <div className="relative mt-4 mb-6 bg-gep-hero text-white rounded-2xl overflow-hidden shadow-2xl ">
+    <div className="relative mt-2 mb-4 bg-gep-hero text-white rounded-2xl overflow-hidden shadow-2xl ">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/5 rounded-full animate-float"></div>
@@ -11,10 +11,10 @@ const HeroSection = () => {
         <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-gep-orange-400/10 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
       </div>
       
-      <div className="relative max-w-4xl mx-auto py-12 px-6 md:py-16 md:px-8">
+      <div className="relative max-w-l mx-auto py-12 px-6 md:py-16 md:px-8">
         <div className="text-center mb-8 animate-fade-in">
           <h1 className="font-poppins text-3xl md:text-5xl font-bold mb-6 leading-tight">
-            Greening Education Dashboard
+            Greening Education in Action
           </h1>
           <p className="font-inter text-lg md:text-xl mb-8 max-w-3xl mx-auto opacity-90 leading-relaxed">
             Tracking global progress on transforming education systems to address climate change 

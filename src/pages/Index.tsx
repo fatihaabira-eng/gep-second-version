@@ -284,105 +284,105 @@ const GlobalDashboard = () => {
             {/* Interactive Map Section */}
             {/* --- New Combined Map and Pillars Section --- */}
             <section className="max-w-screen-2xl mx-auto py-16 px-4">
-    <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-[#004b45]">Global Progress Tracker</h2>
-        <p className="text-gray-600 mt-4 max-w-3xl mx-auto">
-            Explore our progress on the four pillars of the Greening Education Partnership. Search the map to find country-specific data.
-        </p>
-    </div>
+              <div className="text-center mb-12">
+                  <h2 className="text-3xl md:text-4xl font-bold text-[#004b45]">Global Progress Tracker</h2>
+                  <p className="text-gray-600 mt-4 max-w-3xl mx-auto">
+                      Explore our progress on the four pillars of the Greening Education Partnership. Search the map to find country-specific data.
+                  </p>
+              </div>
 
-    <div className="grid grid-cols-1 lg:grid-cols-7 lg:gap-8 items-start"> {/* Changed to 7 columns */}
-        {/* Left Pillars - Pillar 1 and 3 - Now spans 2 columns */}
-        <div className="hidden lg:flex lg:flex-col lg:col-span-2 lg:gap-8">
-            <PillarCard key={pillarData[0].id} pillar={{...pillarData[0]}} />
-            <PillarCard key={pillarData[2].id} pillar={{...pillarData[2],}} />
-        </div>
+              <div className="grid grid-cols-1 lg:grid-cols-7 lg:gap-8 items-start"> {/* Changed to 7 columns */}
+                    {/* Left Pillars - Pillar 1 and 3 - Now spans 2 columns */}
+                    <div className="hidden lg:flex lg:flex-col lg:col-span-2 lg:gap-8">
+                        <PillarCard key={pillarData[0].id} pillar={{...pillarData[0]}} />
+                        <PillarCard key={pillarData[2].id} pillar={{...pillarData[2],}} />
+                    </div>
 
-        {/* Center Map - Reduced to 3 columns (from 5) */}
-        <div className="lg:col-span-3 mb-8 lg:mb-0">
-            <div className="relative w-full max-w-lg mx-auto mb-6">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-                            <input
-                                type="text"
-                                placeholder="Search for a country or region..."
-                                className="w-full p-3 pl-12 rounded-full border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm transition-all bg-white"
-                                value={searchTerm}
-                                onChange={handleSearchChange}
-                                onFocus={handleFocus}
-                                onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)} // Delay to allow click
-                            />
-                            {isSearchFocused && (
-                                <ul className="absolute z-10 mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
-                                    {suggestions.length > 0 ? (
-                                        Object.entries(
-                                            suggestions.reduce((acc, country) => {
-                                                (acc[country.region] = acc[country.region] || []).push(country);
-                                                return acc;
-                                            }, {})
-                                        )
-                                        .sort(([regionA], [regionB]) => regionA.localeCompare(regionB))
-                                        .map(([region, countries]) => (
-                                            <React.Fragment key={region}>
-                                                <li className="px-4 py-2 bg-gray-100 text-sm font-bold text-gray-600 sticky top-0">
-                                                    {region}
-                                                </li>
-                                                {countries.map(country => (
-                                                    <li 
-                                                        key={country.id} 
-                                                        onMouseDown={() => handleCountryClick(country.id)}
-                                                        className="px-4 py-3 text-sm text-gray-700 hover:bg-green-50 cursor-pointer flex justify-between items-center"
-                                                    >
-                                                        <span className="font-semibold pl-2">{country.name}</span>
+                    {/* Center Map - Reduced to 3 columns (from 5) */}
+                    <div className="lg:col-span-3 mb-8 lg:mb-0">
+                        <div className="relative w-full max-w-lg mx-auto mb-6">
+                                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                                        <input
+                                            type="text"
+                                            placeholder="Search for a country or region..."
+                                            className="w-full p-3 pl-12 rounded-full border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm transition-all bg-white"
+                                            value={searchTerm}
+                                            onChange={handleSearchChange}
+                                            onFocus={handleFocus}
+                                            onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)} // Delay to allow click
+                                        />
+                                        {isSearchFocused && (
+                                            <ul className="absolute z-10 mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                                                {suggestions.length > 0 ? (
+                                                    Object.entries(
+                                                        suggestions.reduce((acc, country) => {
+                                                            (acc[country.region] = acc[country.region] || []).push(country);
+                                                            return acc;
+                                                        }, {})
+                                                    )
+                                                    .sort(([regionA], [regionB]) => regionA.localeCompare(regionB))
+                                                    .map(([region, countries]) => (
+                                                        <React.Fragment key={region}>
+                                                            <li className="px-4 py-2 bg-gray-100 text-sm font-bold text-gray-600 sticky top-0">
+                                                                {region}
+                                                            </li>
+                                                            {countries.map(country => (
+                                                                <li 
+                                                                    key={country.id} 
+                                                                    onMouseDown={() => handleCountryClick(country.id)}
+                                                                    className="px-4 py-3 text-sm text-gray-700 hover:bg-green-50 cursor-pointer flex justify-between items-center"
+                                                                >
+                                                                    <span className="font-semibold pl-2">{country.name}</span>
+                                                                </li>
+                                                            ))}
+                                                        </React.Fragment>
+                                                    ))
+                                                ) : searchTerm.length > 0 ? (
+                                                    <li className="px-4 py-3 text-sm text-gray-500">
+                                                        No results found.
                                                     </li>
-                                                ))}
-                                            </React.Fragment>
-                                        ))
-                                    ) : searchTerm.length > 0 ? (
-                                        <li className="px-4 py-3 text-sm text-gray-500">
-                                            No results found.
-                                        </li>
-                                    ) : null}
-                                </ul>
-                            )}
+                                                ) : null}
+                                            </ul>
+                                        )}
+                                    </div>
+                  
+                        <div className="border-2 border-gray-200 rounded-2xl shadow-lg p-6 bg-white">
+                            <WorldMap className="w-full h-auto" /> {/* Added className here */}
                         </div>
-       
-            <div className="border-2 border-gray-200 rounded-2xl shadow-lg p-6 bg-white">
-                <WorldMap className="w-full h-auto" /> {/* Added className here */}
+                        {/* NEW: External Data/Partner Data Section */}
+            <div className="mt-8 bg-white border-2 border-gray-200 rounded-2xl shadow-lg p-6">
+                <h3 className="text-xl font-semibold text-[#004b45] mb-4">Partner Data & External Resources</h3>
+                <div className="min-h-[50px] p-4 bg-gray-50 rounded-lg border border-dashed border-gray-300">
+                    {/* This space will be dynamically filled with external data */}
+                    <p className="text-gray-500 text-center py-2">
+                        [External partner data and resources will be displayed here]
+                    </p>
+                </div>
+                <div className="mt-4 text-sm text-gray-600">
+                    <p>Data provided by our partners will appear in this section, including:</p>
+                    <ul className="list-disc pl-5 mt-2 space-y-1">
+                        <li>Regional progress reports</li>
+                        <li>Partner organization updates</li>
+                        <li>Third-party research findings</li>
+                    </ul>
+                </div>
             </div>
-            {/* NEW: External Data/Partner Data Section */}
-<div className="mt-8 bg-white border-2 border-gray-200 rounded-2xl shadow-lg p-6">
-    <h3 className="text-xl font-semibold text-[#004b45] mb-4">Partner Data & External Resources</h3>
-    <div className="min-h-[50px] p-4 bg-gray-50 rounded-lg border border-dashed border-gray-300">
-        {/* This space will be dynamically filled with external data */}
-        <p className="text-gray-500 text-center py-2">
-            [External partner data and resources will be displayed here]
-        </p>
-    </div>
-    <div className="mt-4 text-sm text-gray-600">
-        <p>Data provided by our partners will appear in this section, including:</p>
-        <ul className="list-disc pl-5 mt-2 space-y-1">
-            <li>Regional progress reports</li>
-            <li>Partner organization updates</li>
-            <li>Third-party research findings</li>
-        </ul>
-    </div>
-</div>
-        </div>
-        
-        {/* Right Pillars - Pillar 2 and 4 - Now spans 2 columns */}
-        <div className="hidden lg:flex lg:flex-col lg:col-span-2 lg:gap-8">
-            <PillarCard key={pillarData[1].id} pillar={{...pillarData[1]}} />
-            <PillarCard key={pillarData[3].id} pillar={{...pillarData[3]}} />
-        </div>
-        
-        {/* Pillars for Mobile/Tablet View */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-6 mt-8">
-            {pillarData.map((pillar, index) => (
-                <PillarCard key={pillar.id} pillar={{...pillar}} />
-            ))}
-        </div>
-    </div>
-</section>
+                    </div>
+                    
+                    {/* Right Pillars - Pillar 2 and 4 - Now spans 2 columns */}
+                    <div className="hidden lg:flex lg:flex-col lg:col-span-2 lg:gap-8">
+                        <PillarCard key={pillarData[1].id} pillar={{...pillarData[1]}} />
+                        <PillarCard key={pillarData[3].id} pillar={{...pillarData[3]}} />
+                    </div>
+                    
+                    {/* Pillars for Mobile/Tablet View */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-6 mt-8">
+                        {pillarData.map((pillar, index) => (
+                            <PillarCard key={pillar.id} pillar={{...pillar}} />
+                        ))}
+                    </div>
+              </div>
+            </section>
 
             {/* Impact Stories Section */}
             <div className="max-w-6xl mx-auto mt-12 py-8">
