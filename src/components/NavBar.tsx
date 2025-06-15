@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FiSearch, FiMenu, FiX } from "react-icons/fi";
 import { Link, useLocation } from "react-router-dom";
-import logo from "./../imgs/logo-gep.png"; // Assuming logo is placed in the public folder
+import logo from "./../imgs/image.png"; // Assuming logo is placed in the public folder
 import { cn } from "@/lib/utils";
 import { 
   NavigationMenu,
