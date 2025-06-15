@@ -248,32 +248,34 @@ const pillarDataStore: Record<string, Pillar> = {
 <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pb-12">
   {/* Header Section */}
   <header
-  className="py-12 md:py-16 text-white shadow-lg rounded-b-3xl mb-12"
-  style={{ background: `linear-gradient(135deg, ${pillar.color} 0%, ${gepBrandColors.darkTeal} 100%)` }}
->
-  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-    <button
-      onClick={() => navigate(-1)}
-      className="mb-8 inline-flex items-center bg-white/20 text-white border-white/30 hover:bg-white/30 backdrop-blur-sm transition-all duration-300 group px-5 py-2.5 rounded-full text-base font-medium shadow-md"
+      className="py-12 md:py-16 text-white shadow-lg rounded-b-3xl mb-12"
+      style={{ background: `linear-gradient(135deg, ${pillar.color} 0%, ${gepBrandColors.darkTeal} 100%)` }}
     >
-      <ArrowLeft size={20} className="mr-2 transition-transform group-hover:-translate-x-1" />
-      Back
-    </button>
-    <div className="flex items-center space-x-6">
-      <div className="w-24 h-24 p-3 rounded-full flex items-center justify-center" style={{ backgroundColor: `${pillar.color}80` }}>
-        <img 
-          src={pillar.image} 
-          alt={`${pillar.title} icon`}
-          className="w-20 h-20 object-contain opacity-90"
-        />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <button
+          onClick={() => navigate("/")}
+          className="mb-8 inline-flex items-center bg-white/20 text-white border-white/30 hover:bg-white/30 backdrop-blur-sm transition-all duration-300 group px-5 py-2.5 rounded-full text-base font-medium shadow-md"
+        >
+          <ArrowLeft size={20} className="mr-2 transition-transform group-hover:-translate-x-1" />
+          Back
+        </button>
+        <div className="flex items-center space-x-6">
+          {/* <div className="w-25 h-25 p-3 rounded-full flex items-center justify-center" style={{ backgroundColor: `${pillar.color}` }}>
+            <img 
+              src={pillar.image} 
+              alt={`${pillar.title} icon`}
+              className="w-20 h-20 object-contain opacity-90"
+            />
+          </div> */}
+          <PillarIcon size={72} className="text-white opacity-90 p-2 rounded-full" strokeWidth={1.5} style={{ backgroundColor: `${pillar.color}80` }}/>
+            
+          <div>
+            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight drop-shadow-lg">{pillar.title}</h1>
+            {pillar.subtitle && <p className="text-xl md:text-2xl text-white/90 mt-2">{pillar.subtitle}</p>}
+          </div>
+        </div>
       </div>
-      <div>
-        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight drop-shadow-lg">{pillar.title}</h1>
-        {pillar.subtitle && <p className="text-xl md:text-2xl text-white/90 mt-2">{pillar.subtitle}</p>}
-      </div>
-    </div>
-  </div>
-</header>
+    </header>
 
   {/* Main Content Area */}
   <main className="container mx-auto px-4 sm:px-6 lg:px-8">
