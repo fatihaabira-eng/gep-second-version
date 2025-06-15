@@ -82,9 +82,9 @@ const PillarCard = ({ pillar }) => {
 // --- New Quick Links Section ---
 const QuickLinksSection = () => {
     const quickLinks = [
-        { name: 'What is the GEP?', description: 'Learn about our mission and goals.', href: '#about-gep', icon: Info },
+        { name: 'What is the GEP?', description: 'Learn about our mission and goals.', href: 'https://www.unesco.org/en/sustainable-development/education/greening-future', icon: Info },
         { name: 'Members', description: 'See the full list of our partners.', href: 'https://www.unesco.org/en/sustainable-development/education/greening-future/members', icon: Users },
-        { name: 'Join GEP', description: 'Become a part of the partnership.', href: '#', icon: UserPlus },
+        { name: 'Join GEP', description: 'Become a part of the partnership.', href: 'https://forms.office.com/pages/responsepage.aspx?id=Uq5PHbM5-kuwswIpVrERlOo8vEWOIfFHtp-MDDNlsO5URTNOWEk5VUpGRFY4TVA1SU42WkRUVVM0WC4u&route=shorturl', icon: UserPlus },
         { name: 'Contact Secretariat', description: 'Get in touch with our team.', href: 'mailto:gep@unesco.org', icon: MessageSquare },
     ];
 
