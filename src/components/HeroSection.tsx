@@ -18,7 +18,7 @@ const HeroSection = () => {
           </h1>
           <p className="font-inter text-lg md:text-xl mb-8 max-w-3xl mx-auto opacity-90 leading-relaxed">
             Tracking global progress on transforming education systems to address climate change 
-            and support sustainable development through UNESCO's Greening Education Partnership.
+            and support sustainable development through the Greening Education Partnership.
           </p>
         </div>
         
