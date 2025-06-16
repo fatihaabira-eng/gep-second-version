@@ -37,7 +37,7 @@ const Footer = () => {
 
                     {/* Partners Section */}
                     <div>
-                        <h3 className="text-lg font-semibold mb-4 text-white">Key Partners</h3>
+                        <h3 className="text-lg font-semibold mb-4 text-white">Term of Use</h3>
                         <ul className="text-gray-300 text-sm space-y-2">
                             <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">-</a></li>
                             <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">-</a></li>

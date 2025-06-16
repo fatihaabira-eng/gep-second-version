@@ -14,7 +14,7 @@ export const QuickLinksSection = () => {
             <div className="max-w-6xl mx-auto px-4">
                 <div className="text-center mb-12">
                     <h2 className="text-3xl font-bold text-[#004b45]">Get Involved & Learn More</h2>
-                    <p className="text-gray-600 mt-3">Quick access to key information and actions.</p>
+                    {/* <p className="text-gray-600 mt-3">Quick access to key information and actions.</p> */}
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {quickLinks.map(link => (
@@ -31,7 +31,7 @@ export const QuickLinksSection = () => {
                                 </div>
                             </div>
                             <h3 className="text-lg font-bold text-[#3A6A6D] mb-2">{link.name}</h3>
-                            <p className="text-sm text-gray-600 mb-4">{link.description}</p>
+                            {/* <p className="text-sm text-gray-600 mb-4">{link.description}</p> */}
                             <span className="inline-flex items-center text-sm font-semibold text-[#6cb154]">
                                 Go <ArrowRight className="ml-1 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                             </span>

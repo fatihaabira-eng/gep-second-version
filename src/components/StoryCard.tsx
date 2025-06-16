@@ -31,7 +31,7 @@ const StoryCard = ({ title, excerpt, country, date, imageUrl, url }: StoryCardPr
         </div>
         <CardDescription className="flex gap-2 items-center text-xs">
           <span className="font-medium">{country}</span>
-          <span className="text-gray-400">•</span>
+          {/* <span className="text-gray-400">•</span> */}
           <span>{date}</span>
         </CardDescription>
       </CardHeader>
