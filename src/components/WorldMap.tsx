@@ -47,73 +47,19 @@ const countryData: CountryData[] = [
     name: 'United Arab Emirates',
     isoCode: 'AE',
     region: 'Middle East and North Africa',
-    quickFact: 'National Green Schools program covers 60% of schools',
+    quickFact: 'A place for the quick facts',
     coordinates: { longitude: 54.3773, latitude: 24.4539 },
     isIcesco: true
   },
   {
-    id: 'morocco',
-    name: 'Morocco',
-    isoCode: 'MA',
-    region: 'Middle East and North Africa',
-    quickFact: 'Eco-Schools program has certified 2,000+ schools',
-    coordinates: { longitude: -7.9810, latitude: 31.7917 },
-    isIcesco: true
+    id: 'al',
+    name: 'Albania',
+    isoCode: 'AL',
+    region: 'Southest Europe',
+    quickFact: 'A place for the quick facts',
+    coordinates: { longitude: 20.1683, latitude: 41.1533 },
+    isIcesco: false
   },
-  {
-    id: 'egypt',
-    name: 'Egypt',
-    isoCode: 'EG',
-    region: 'Middle East and North Africa',
-    quickFact: 'Climate curriculum adopted in 75% of schools',
-    coordinates: { longitude: 30.8025, latitude: 26.8206 },
-    isIcesco: true
-  },
-  {
-    id: 'jordan',
-    name: 'Jordan',
-    isoCode: 'JO',
-    region: 'Middle East and North Africa',
-    quickFact: 'Water conservation program in 500+ schools',
-    coordinates: { longitude: 36.2384, latitude: 30.5852 },
-    isIcesco: true
-  },
-  {
-    id: 'saudi',
-    name: 'Saudi Arabia', 
-    isoCode: 'SA',
-    region: 'Middle East and North Africa',
-    quickFact: 'Vision 2030 includes major green education initiatives',
-    coordinates: { longitude: 45.0792, latitude: 23.8859 },
-    isIcesco: true
-  },
-  {
-    id: 'qatar',
-    name: 'Qatar',
-    isoCode: 'QA', 
-    region: 'Middle East and North Africa',
-    quickFact: 'National Sustainability Education Framework launched in 2023',
-    coordinates: { longitude: 51.1839, latitude: 25.3548 },
-    isIcesco: true
-  },
-  {
-    id: 'bahrain',
-    name: 'Bahrain',
-    isoCode: 'BH',
-    region: 'Middle East and North Africa',
-    quickFact: 'Teacher training in climate education reaches 3,000 educators',
-    coordinates: { longitude: 50.5577, latitude: 26.0667 },
-    isIcesco: true
-  },
-  {
-    id: 'kuwait',
-    name: 'Kuwait',
-    isoCode: 'KW',
-    region: 'Middle East and North Africa',
-    quickFact: 'Environmental awareness programs in all public schools',
-    coordinates: { longitude: 47.4818, latitude: 29.3117 },
-    isIcesco: true
-  }
 ];
 
 const ICESCO_COUNTRIES = [

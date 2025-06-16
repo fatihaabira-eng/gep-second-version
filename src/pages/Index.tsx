@@ -135,6 +135,7 @@ const GlobalDashboard = () => {
     { name: "United Arabe Emarates", id: "uae", region: "Middle east"  },
     { name: "Egypt", id: "egypt" , region: "North Africa" },
     { name: "Kenya", id: "kenya" , region: " Africa" },
+    { name: "Albania", id: "al" , region: " Southest Europe" },
     // ... add more countries
   ];
   useEffect(() => {
