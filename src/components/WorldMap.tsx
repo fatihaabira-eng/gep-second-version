@@ -265,9 +265,7 @@ const WorldMap = () => {
   return (
     <div className="relative w-full h-[500px] bg-[#f7f9fc] rounded-xl shadow-md overflow-hidden">
       <div ref={mapRef} className="w-full h-full"></div>
-      <p className="text-gray-700 mb-4 text-center">
-          Hover over a country for quick facts. Clicking on a country will direct you to its country profile page.
-        </p>
+      
       <div className="absolute top-4 right-4 flex flex-col gap-2 bg-white/80 backdrop-blur-sm rounded-lg shadow-md">
         <TooltipProvider>
           <Tooltip>
@@ -291,7 +289,7 @@ const WorldMap = () => {
           <Tooltip>
             <TooltipTrigger asChild>
               <button 
-                className="p-2 hover:bg-[#0f7378]/10 rounded-b-lg transition-colors"
+                className="p-2 hover:bg-[#0f7378]/10 transition-colors"
                 onClick={() => {
                   if (viewRef.current) {
                     viewRef.current.goTo({ zoom: viewRef.current.zoom + 1 });
@@ -313,7 +311,7 @@ const WorldMap = () => {
           <Tooltip>
             <TooltipTrigger asChild>
               <button 
-                className="p-2 hover:bg-[#0f7378]/10 rounded-b-lg transition-colors"
+                className="p-2 hover:bg-[#0f7378]/10 transition-colors"
                 onClick={() => {
                   if (viewRef.current) {
                     viewRef.current.goTo({ zoom: viewRef.current.zoom - 1 });
@@ -370,29 +368,30 @@ const WorldMap = () => {
         </div>
       )}
 
-      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg shadow-md p-3 max-w-[260px] text-sm border-l-3 border-[#0f7378]">
-        <p className="flex items-center mb-2">
-          <span className="inline-block w-3 h-3 bg-[#6cb154] rounded-full mr-2"></span>
-          Click on markers to see country profiles
+      {/* UPDATED: Made the top-left info box smaller */}
+      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg shadow-md p-2 max-w-[240px] text-xs border-l-3 border-[#0f7378]">
+        <p className="flex items-center mb-1">
+          <span className="inline-block w-3 h-3 bg-[#6cb154] rounded-full mr-2 shrink-0"></span>
+          Click markers to see country profiles
         </p>
         <p className="flex items-center">
-          <span className="inline-block w-3 h-3 bg-[#0f7378] rounded-full mr-2"></span>
+          <span className="inline-block w-3 h-3 bg-[#0f7378] rounded-full mr-2 shrink-0"></span>
           Use <Compass size={14} className="inline mx-1" /> to toggle 3D view
         </p>
       </div>
 
-      <div className="absolute bottom-4 left-4 bg-white/80 backdrop-blur-sm p-3 rounded text-xs space-y-2">
+      {/* UPDATED: Put the legend items on one line */}
+      <div className="absolute bottom-4 left-4 bg-white/80 backdrop-blur-sm p-2 rounded-lg text-xs flex items-center space-x-4">
         <div className="flex items-center gap-2">
-          <Globe size={14} className="text-[#0f7378]" />
-          <span className="text-gray-700">UNESCO Greening Education Map {is3DMode ? '(3D)' : '(2D)'}</span>
+            <span className="text-gray-700 font-semibold">Legend:</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-[#00787D]"></span>
-          <span className="text-gray-700">ICESCO Member Countries</span>
+            <span className="w-3 h-3 rounded-full bg-[#00787D]"></span>
+            <span className="text-gray-700">ICESCO Member</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-[#6cb154]"></span>
-          <span className="text-gray-700">Other Countries</span>
+            <span className="w-3 h-3 rounded-full bg-[#6cb154]"></span>
+            <span className="text-gray-700">Other Countries</span>
         </div>
       </div>
 
