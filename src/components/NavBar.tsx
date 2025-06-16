@@ -128,7 +128,7 @@ const NavBar: React.FC = () => {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Link to="/about" className={cn(
+                  <Link to="#" className={cn(
                     navigationMenuTriggerStyle(),
                     "text-lg font-medium text-[#02585c] hover:text-[#6cb154] transition-colors duration-200",
                     isActive("/about") ? "bg-[#6cb154]/10 text-[#6cb154] font-semibold" : ""
