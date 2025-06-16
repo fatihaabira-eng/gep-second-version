@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Filter, MapPin, Globe } from 'lucide-react';
+import { QuickLinksSection } from './QuickLinks';
 
 interface Country {
   id: string;
@@ -47,9 +48,9 @@ function CountryList() {
             <Globe className="text-white h-8 w-8" />
           </div>
           <h1 className="text-5xl font-bold mb-4 tracking-tight">GEP Country Profiles</h1>
-          <p className="text-xl max-w-2xl mx-auto">
+          {/* <p className="text-xl max-w-2xl mx-auto">
             Explore climate-smart education initiatives and track progress across different countries
-          </p>
+          </p> */}
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 to-transparent"></div>
       </header>
@@ -149,6 +150,7 @@ function CountryList() {
           </div>
         )}
       </div>
+      <QuickLinksSection />
     </div>
   );
 }
