@@ -12,7 +12,7 @@ import pillar1_image from '../imgs/pillar1.png';
 import pillar2_image from '../imgs/pillar2.png';
 import pillar3_image from '../imgs/pillar3.png';
 import pillar4_image from '../imgs/pillar4.png';
-
+import { QuickLinksSection } from "@/components/QuickLinks";
 
 /**
  * PillarCard Component
@@ -31,7 +31,7 @@ const PillarCard = ({ pillar }) => {
 
   return (
     // Increased min-height
-    <div className="bg-gradient-to-br from-white to-gray-50 p-6 rounded-2xl shadow-lg border border-gray-100 flex flex-col h-full hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 min-h-[320px]">
+    <div className="bg-gradient-to-br from-white to-gray-50 p-6 rounded-2xl shadow-lg border border-gray-100 flex flex-col hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-[340px]">
       {/* Increased margin-bottom */}
       <div className="flex items-start mb-5">
         {/* Replacing icon with image */}
@@ -50,7 +50,7 @@ const PillarCard = ({ pillar }) => {
       {/* Increased margin-bottom */}
       <div className="mb-6">
         {/* Slightly thicker progress bar */}
-        <div className="w-full bg-gray-200 rounded-full h-3 my-3">
+        <div className="w-full bg-gray-200 rounded-full h-5 my-3">
           {/* Matching thickness */}
           <div
             className="bg-[#16A34A] h-3 rounded-full"
@@ -76,50 +76,6 @@ const PillarCard = ({ pillar }) => {
       </a>
     </div>
   );
-};
-
-
-// --- New Quick Links Section ---
-const QuickLinksSection = () => {
-    const quickLinks = [
-        { name: 'What is the GEP?', description: 'Learn about our mission and goals.', href: 'https://www.unesco.org/en/sustainable-development/education/greening-future', icon: Info },
-        { name: 'Members', description: 'See the full list of our partners.', href: 'https://www.unesco.org/en/sustainable-development/education/greening-future/members', icon: Users },
-        { name: 'Join GEP', description: 'Become a part of the partnership.', href: 'https://forms.office.com/pages/responsepage.aspx?id=Uq5PHbM5-kuwswIpVrERlOo8vEWOIfFHtp-MDDNlsO5URTNOWEk5VUpGRFY4TVA1SU42WkRUVVM0WC4u&route=shorturl', icon: UserPlus },
-        { name: 'Contact Secretariat', description: 'Get in touch with our team.', href: 'mailto:gep@unesco.org', icon: MessageSquare },
-    ];
-
-    return (
-        <section className="bg-white py-16">
-            <div className="max-w-6xl mx-auto px-4">
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold text-[#004b45]">Get Involved & Learn More</h2>
-                    <p className="text-gray-600 mt-3">Quick access to key information and actions.</p>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {quickLinks.map(link => (
-                        <a 
-                            key={link.name} 
-                            href={link.href} 
-                            target={link.href.startsWith('http') ? '_blank' : '_self'}
-                            rel="noopener noreferrer"
-                            className="group block bg-gray-50 p-6 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-200 text-center"
-                        >
-                            <div className="flex justify-center mb-4">
-                                <div className="bg-green-100 p-4 rounded-full">
-                                    <link.icon className="text-[#6cb154]" size={32} />
-                                </div>
-                            </div>
-                            <h3 className="text-lg font-bold text-[#3A6A6D] mb-2">{link.name}</h3>
-                            <p className="text-sm text-gray-600 mb-4">{link.description}</p>
-                            <span className="inline-flex items-center text-sm font-semibold text-[#6cb154]">
-                                Go <ArrowRight className="ml-1 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                            </span>
-                        </a>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
 };
 
 const GlobalDashboard = () => {
@@ -288,9 +244,6 @@ const GlobalDashboard = () => {
             <section className="max-w-screen-2xl mx-auto py-16 px-4">
               <div className="text-center mb-12">
                   <h2 className="text-3xl md:text-4xl font-bold text-[#004b45]">Global Progress Tracker</h2>
-                  <p className="text-gray-600 mt-4 max-w-3xl mx-auto">
-                      Explore our progress on the four pillars of the Greening Education Partnership. Search the map to find country-specific data.
-                  </p>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-7 lg:gap-8 items-start"> {/* Changed to 7 columns */}
@@ -301,75 +254,44 @@ const GlobalDashboard = () => {
                     </div>
 
                     {/* Center Map - Reduced to 3 columns (from 5) */}
-                    <div className="lg:col-span-3 mb-8 lg:mb-0">
-                        <div className="relative w-full max-w-lg mx-auto mb-6">
-                                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-                                        <input
-                                            type="text"
-                                            placeholder="Search for a country or region..."
-                                            className="w-full p-3 pl-12 rounded-full border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm transition-all bg-white"
-                                            value={searchTerm}
-                                            onChange={handleSearchChange}
-                                            onFocus={handleFocus}
-                                            onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)} // Delay to allow click
-                                        />
-                                        {isSearchFocused && (
-                                            <ul className="absolute z-10 mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
-                                                {suggestions.length > 0 ? (
-                                                    Object.entries(
-                                                        suggestions.reduce((acc, country) => {
-                                                            (acc[country.region] = acc[country.region] || []).push(country);
-                                                            return acc;
-                                                        }, {})
-                                                    )
-                                                    .sort(([regionA], [regionB]) => regionA.localeCompare(regionB))
-                                                    .map(([region, countries]) => (
-                                                        <React.Fragment key={region}>
-                                                            <li className="px-4 py-2 bg-gray-100 text-sm font-bold text-gray-600 sticky top-0">
-                                                                {region}
-                                                            </li>
-                                                            {countries.map(country => (
-                                                                <li 
-                                                                    key={country.id} 
-                                                                    onMouseDown={() => handleCountryClick(country.id)}
-                                                                    className="px-4 py-3 text-sm text-gray-700 hover:bg-green-50 cursor-pointer flex justify-between items-center"
-                                                                >
-                                                                    <span className="font-semibold pl-2">{country.name}</span>
-                                                                </li>
-                                                            ))}
-                                                        </React.Fragment>
-                                                    ))
-                                                ) : searchTerm.length > 0 ? (
-                                                    <li className="px-4 py-3 text-sm text-gray-500">
-                                                        No results found.
-                                                    </li>
-                                                ) : null}
-                                            </ul>
-                                        )}
-                                    </div>
-                  
-                        <div className="border-2 border-gray-200 rounded-2xl shadow-lg p-6 bg-white">
-                            <WorldMap className="w-full h-auto" /> {/* Added className here */}
-                        </div>
-                        {/* NEW: External Data/Partner Data Section */}
-            <div className="mt-8 bg-white border-2 border-gray-200 rounded-2xl shadow-lg p-6">
-                <h3 className="text-xl font-semibold text-[#004b45] mb-4">Partner Data & External Resources</h3>
-                <div className="min-h-[50px] p-4 bg-gray-50 rounded-lg border border-dashed border-gray-300">
-                    {/* This space will be dynamically filled with external data */}
-                    <p className="text-gray-500 text-center py-2">
-                        [External partner data and resources will be displayed here]
-                    </p>
-                </div>
-                <div className="mt-4 text-sm text-gray-600">
-                    <p>Data provided by our partners will appear in this section, including:</p>
-                    <ul className="list-disc pl-5 mt-2 space-y-1">
-                        <li>Regional progress reports</li>
-                        <li>Partner organization updates</li>
-                        <li>Third-party research findings</li>
+                    <div className="lg:col-span-3 mb-4 lg:mb-0">
+                {/* Search box - reduced margin bottom */}
+                <div className="relative w-full mx-auto mb-3">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                  <input
+                    type="text"
+                    placeholder="Search for a country or region..."
+                    className="w-full p-3 pl-12 rounded-lg border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm transition-all bg-white"
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    onFocus={handleFocus}
+                    onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
+                  />
+                  {isSearchFocused && (
+                    <ul className="absolute z-10 mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                      {/* ... */}
                     </ul>
+                  )}
                 </div>
-            </div>
-                    </div>
+
+                {/* World map - reduced spacing by removing margin or using mb-3 */}
+                <div className="border-2 border-gray-200 rounded-2xl shadow-lg p-6 bg-white mb-3">
+                  <WorldMap className="w-full h-auto" />
+                </div>
+
+                {/* External data section - removed mt-6, added consistent spacing */}
+                <div className="bg-white border-2 border-gray-200 rounded-2xl shadow-lg p-2">
+                  <div className="min-h-[66px] px-4 py-2 bg-gray-50 rounded-lg border border-dashed border-gray-300">
+                    <p className="text-gray-500 text-center text-sm leading-tight">
+                      [External partner data and resources will be displayed here]
+                    </p>
+                  </div>
+                </div>
+
+
+
+              </div>
+
                     
                     {/* Right Pillars - Pillar 2 and 4 - Now spans 2 columns */}
                     <div className="hidden lg:flex lg:flex-col lg:col-span-2 lg:gap-8">

@@ -8,6 +8,8 @@ import pillar1_image from '../imgs/pillar1.png';
 import pillar2_image from '../imgs/pillar2.png';
 import pillar3_image from '../imgs/pillar3.png';
 import pillar4_image from '../imgs/pillar4.png';
+import { QuickLinksSection } from './QuickLinks';
+import { ImpactStories } from './ImpactStories';
 // Helper to map pillar IDs to icons
 const pillarIcons: Record<string, React.ElementType> = {
   'green-schools': School, // You'd need to import School from lucide-react or use a similar one
@@ -72,7 +74,7 @@ function PillarPage() {
 const pillarDataStore: Record<string, Pillar> = {
   'green-schools': {
     id: 'green-schools',
-    title: 'Greening Schools',
+    title: 'Pillar 1 : Greening Schools',
     subtitle: 'Fostering sustainable learning environments.',
     vision:
       'From early childhood through adult education, work to ensure that all schools achieve green school accreditation, including teacher training and higher education institutions.',
@@ -108,7 +110,7 @@ const pillarDataStore: Record<string, Pillar> = {
 
   'green-curriculum': {
     id: 'green-curriculum',
-    title: 'Greening Every Curriculum',
+    title: 'Pillar 2 : Greening Every Curriculum',
     subtitle: 'Integrating climate education across all learning levels.',
     vision:
       'Embrace a life-long learning approach that integrates climate education into school curricula, technical and vocational training, workplace skills development, teaching materials, pedagogy, and assessment.',
@@ -144,7 +146,7 @@ const pillarDataStore: Record<string, Pillar> = {
 
   'teacher-capacity': {
     id: 'teacher-capacity',
-    title: 'Greening Teacher Training & Education System Capacities',
+    title: 'Pillar 3 : Greening Teacher Training & Education System Capacities',
     subtitle: 'Empowering educators and strengthening systems for climate action.',
     vision:
       'Support all GEP member states in establishing professional teaching standards that include climate change by 2030.',
@@ -181,7 +183,7 @@ const pillarDataStore: Record<string, Pillar> = {
 
   'green-communities': {
     id: 'green-communities',
-    title: 'Greening Communities',
+    title: 'Pillar 4 : Greening Communities',
     subtitle: 'Fostering lifelong learning for sustainable communities.',
     vision: '', // Placeholder
     target:
@@ -248,34 +250,32 @@ const pillarDataStore: Record<string, Pillar> = {
 <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pb-12">
   {/* Header Section */}
   <header
-      className="py-12 md:py-16 text-white shadow-lg rounded-b-3xl mb-12"
-      style={{ background: `linear-gradient(135deg, ${pillar.color} 0%, ${gepBrandColors.darkTeal} 100%)` }}
+  className="py-6 md:py-8 text-white shadow-lg rounded-b-3xl mb-12"
+  style={{ background: `linear-gradient(135deg, ${pillar.color} 0%, ${gepBrandColors.darkTeal} 100%)` }}
+>
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <button
+      onClick={() => navigate("/")}
+      className="mb-6 inline-flex items-center bg-white/20 text-white border-white/30 hover:bg-white/30 backdrop-blur-sm transition-all duration-300 group px-5 py-2 rounded-full text-sm font-medium shadow-md"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <button
-          onClick={() => navigate("/")}
-          className="mb-8 inline-flex items-center bg-white/20 text-white border-white/30 hover:bg-white/30 backdrop-blur-sm transition-all duration-300 group px-5 py-2.5 rounded-full text-base font-medium shadow-md"
-        >
-          <ArrowLeft size={20} className="mr-2 transition-transform group-hover:-translate-x-1" />
-          Back
-        </button>
-        <div className="flex items-center space-x-6">
-          {/* <div className="w-25 h-25 p-3 rounded-full flex items-center justify-center" style={{ backgroundColor: `${pillar.color}` }}>
-            <img 
-              src={pillar.image} 
-              alt={`${pillar.title} icon`}
-              className="w-20 h-20 object-contain opacity-90"
-            />
-          </div> */}
-          <PillarIcon size={72} className="text-white opacity-90 p-2 rounded-full" strokeWidth={1.5} style={{ backgroundColor: `${pillar.color}80` }}/>
-            
-          <div>
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight drop-shadow-lg">{pillar.title}</h1>
-            {pillar.subtitle && <p className="text-xl md:text-2xl text-white/90 mt-2">{pillar.subtitle}</p>}
-          </div>
-        </div>
+      <ArrowLeft size={18} className="mr-2 transition-transform group-hover:-translate-x-1" />
+      Back
+    </button>
+    <div className="flex items-center space-x-4">
+      <div className="w-20 h-20 p-2 rounded-full flex items-center justify-center" style={{ backgroundColor: `${pillar.color}` }}>
+        <img 
+          src={pillar.image} 
+          alt={`${pillar.title} icon`}
+          className="w-16 h-16 object-contain opacity-90"
+        />
       </div>
-    </header>
+      <div>
+        <h1 className="text-2xl md:text-4xl font-extrabold tracking-tight drop-shadow-lg">{pillar.title}</h1>
+      </div>
+    </div>
+  </div>
+</header>
+
 
   {/* Main Content Area */}
   <main className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -297,91 +297,69 @@ const pillarDataStore: Record<string, Pillar> = {
       </div>
     </div>
 
-    {/* Progress, Definition, Guidance - Single Row */}
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8 lg:grid-rows-1">
-  {/* Progress Bar - Left */}
-  {pillar.progress && (
-    <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 flex flex-col">
-      
-<h3 className="text-2xl font-bold flex items-center mb-6" style={{ color: gepBrandColors.darkTeal }}>
-  <TrendingUp 
-    size={28} 
-    className="mr-3 opacity-80 flex-shrink-0" 
-    style={{ 
-      color: pillar.color,
-      width: '28px',
-      height: '28px'
-    }} 
-  />
-  Target: By 2030 50% of schools in every country greened
-</h3>
-      <div className="flex-1 flex flex-col justify-center">
-        <div className="text-center mb-6">
-          <div
-            className="text-6xl font-bold mb-2"
-            style={{ color: pillar.color }}
-          >
-            {pillar.progress.percentage}%
+    {/* First Row: Target Progress and Definition - 2 Columns */}
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+      {/* Target Progress - Left */}
+      {pillar.progress && (
+        <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 flex flex-col">
+          <h3 className="text-2xl font-bold flex items-center mb-6" style={{ color: gepBrandColors.darkTeal }}>
+            <TrendingUp 
+              size={28} 
+              className="mr-3 opacity-80 flex-shrink-0" 
+              style={{ 
+                color: pillar.color,
+                width: '28px',
+                height: '28px'
+              }} 
+            />
+            Target: By 2030 50% of schools in every country greened
+          </h3>
+          <div className="flex-1 flex flex-col justify-center">
+            <div className="text-center mb-6">
+              <div
+                className="text-6xl font-bold mb-2"
+                style={{ color: pillar.color }}
+              >
+                {pillar.progress.percentage}%
+              </div>
+              <p className="text-sm text-gray-600">Target Achieved</p>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-6 overflow-hidden shadow-inner mb-4">
+              <div
+                className="h-full rounded-full transition-all duration-1000 ease-out"
+                style={{
+                  backgroundColor: pillar.color,
+                  width: progressBarWidth
+                }}
+              ></div>
+            </div>
+            <p className="text-base text-gray-700 text-center">
+              <strong style={{ color: pillar.color }}>{pillar.progress.current.toLocaleString()}</strong> of {pillar.progress.total.toLocaleString()} {pillar.totalUnit}
+            </p>
+            {pillar.progress.note && (
+              <p className="text-xs text-gray-500 italic text-center bg-gray-100 p-3 rounded-md mt-4">{pillar.progress.note}</p>
+            )}
           </div>
-          <p className="text-sm text-gray-600">Target Achieved</p>
         </div>
-        <div className="w-full bg-gray-200 rounded-full h-6 overflow-hidden shadow-inner mb-4">
-          <div
-            className="h-full rounded-full transition-all duration-1000 ease-out"
-            style={{
-              backgroundColor: pillar.color,
-              width: progressBarWidth
-            }}
-          ></div>
-        </div>
-        <p className="text-base text-gray-700 text-center">
-          <strong style={{ color: pillar.color }}>{pillar.progress.current.toLocaleString()}</strong> of {pillar.progress.total.toLocaleString()} {pillar.totalUnit}
-        </p>
-        {pillar.progress.note && (
-          <p className="text-xs text-gray-500 italic text-center bg-gray-100 p-3 rounded-md mt-4">{pillar.progress.note}</p>
-        )}
-      </div>
-    </div>
-  )}
+      )}
 
-  {/* Definition - Middle */}
-  {pillar.definition && (
-    <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 flex flex-col">
-      <h3 className="text-2xl font-bold flex items-center mb-6" style={{ color: gepBrandColors.darkTeal }}>
-        <Info size={28} className="mr-3 opacity-80" style={{ color: pillar.color }} />
-        {pillar.definition.title}
-      </h3>
-      <div className="flex-1">
-        <p className="text-gray-700 leading-relaxed text-base mb-4 whitespace-pre-line">{pillar.definition.content}</p>
-      </div>
-    </div>
-  )}
-
-  {/* Guidance - Right */}
-  {pillar.guidance && (
-    <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 flex flex-col">
-      <h3 className="text-2xl font-bold flex items-center mb-6" style={{ color: gepBrandColors.darkTeal }}>
-        {pillar.guidance.icon && <pillar.guidance.icon size={28} className="mr-3 opacity-80" style={{ color: pillar.color }} />}
-        {pillar.guidance.title}
-      </h3>
-      <div className="flex-1 flex flex-col">
-        {pillar.guidance.description && <p className="text-gray-700 leading-relaxed text-base mb-4 flex-1">{pillar.guidance.description}</p>}
-        {pillar.guidance.link && pillar.guidance.linkText && (
-          <div className="mt-auto">
-            <a href={pillar.guidance.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center bg-[#18B2E8] text-white px-6 py-2 rounded-full text-base font-semibold hover:bg-[#5a9f45] transition-colors duration-200 shadow-md transform hover:scale-105">
-              {pillar.guidance.icon === Download ? <Download size={18} className="mr-2" /> : <ExternalLink size={18} className="mr-2" />}
-              {pillar.guidance.linkText}
-            </a>
+      {/* Definition - Right */}
+      {pillar.definition && (
+        <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 flex flex-col">
+          <h3 className="text-2xl font-bold flex items-center mb-6" style={{ color: gepBrandColors.darkTeal }}>
+            <Info size={28} className="mr-3 opacity-80" style={{ color: pillar.color }} />
+            {pillar.definition.title}
+          </h3>
+          <div className="flex-1">
+            <p className="text-gray-700 leading-relaxed text-base mb-4 whitespace-pre-line">{pillar.definition.content}</p>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
-  )}
-</div>
 
-    {/* Working Group and Impact Stories - Full Width */}
+    {/* Second Row: Working Group and Green School Quality Standard - 2 Columns */}
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      {/* Working Group */}
+      {/* Working Group - Left */}
       <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100">
         <h3 className="text-2xl font-bold flex items-center mb-6" style={{ color: gepBrandColors.darkTeal }}>
           <MessageSquare size={28} className="mr-3 opacity-80" style={{ color: gepBrandColors.darkTeal }} />
@@ -392,28 +370,30 @@ const pillarDataStore: Record<string, Pillar> = {
         </p>
       </div>
 
-      {/* Impact Stories */}
-      <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100">
-        <h3 className="text-2xl font-bold flex items-center mb-6" style={{ color: gepBrandColors.darkTeal }}>
-          <Sparkles size={28} className="mr-3 opacity-80" style={{ color: pillar.color }} />
-          Partner Spotlights (Impact Stories)
-        </h3>
-        <div className="space-y-4 mb-6">
-          {pillar.impactStories && pillar.impactStories.length > 0 ? (
-            pillar.impactStories.map((story, index) => (
-              <div key={index} className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:bg-gray-100 transition-colors">
-                <a href={story.url} target="_blank" rel="noopener noreferrer" className="text-[#18B2E8] hover:underline font-medium text-base flex items-center">
-                  {story.title} <ExternalLink size={16} className="ml-2" />
+      {/* Green School Quality Standard - Right */}
+      {pillar.guidance && (
+        <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 flex flex-col">
+          <h3 className="text-2xl font-bold flex items-center mb-6" style={{ color: gepBrandColors.darkTeal }}>
+            {pillar.guidance.icon && <pillar.guidance.icon size={28} className="mr-3 opacity-80" style={{ color: pillar.color }} />}
+            {pillar.guidance.title}
+          </h3>
+          <div className="flex-1 flex flex-col">
+            {pillar.guidance.description && <p className="text-gray-700 leading-relaxed text-base mb-4 flex-1">{pillar.guidance.description}</p>}
+            {pillar.guidance.link && pillar.guidance.linkText && (
+              <div className="mt-auto">
+                <a href={pillar.guidance.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center bg-[#18B2E8] text-white px-6 py-2 rounded-full text-base font-semibold hover:bg-[#5a9f45] transition-colors duration-200 shadow-md transform hover:scale-105">
+                  {pillar.guidance.icon === Download ? <Download size={18} className="mr-2" /> : <ExternalLink size={18} className="mr-2" />}
+                  {pillar.guidance.linkText}
                 </a>
               </div>
-            ))
-          ) : (
-            <p className="text-gray-600 text-sm italic text-center py-4">No impact stories yet. Check back soon!</p>
-          )}
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   </main>
+  <ImpactStories />
+  <QuickLinksSection />
 </div>)
 }
 

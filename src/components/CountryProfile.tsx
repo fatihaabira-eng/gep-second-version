@@ -5,6 +5,8 @@ import pillar2_image from '../imgs/pillar2.png';
 import pillar3_image from '../imgs/pillar3.png';
 import pillar4_image from '../imgs/pillar4.png';
 import { useParams } from 'react-router-dom';
+import { QuickLinksSection } from './QuickLinks';
+import { ImpactStories } from './ImpactStories';
 
 // --- MOCK DATA ---
 const countryData = {
@@ -53,7 +55,7 @@ const countryData = {
       ],
       ndcLink: "https://unfccc.int/sites/default/files/2024-11/UAE-NDC3.0.pdf",
       ndcEarthDayLink: "https://www.earthday.org/ndc-tracker/#category2",
-      countryResponse: "In 2009 the UAE launched the Sustainable Schools Initiative... In 2022, Minister of Education has committed to implement the Green Education Partnership in the UAE. Since then, the Ministry of Education has designed and developed a framework and roadmap to achieve all the Green Pillars KPI by the end of the COP 28.",
+      countryResponse: "In 2009 the UAE launched the Sustainable Schools Initiative – an interactive and participatory approach among both public and private schools. The initiative aimed to achieve measurable outcomes in efficient use of resources and adoption of new teaching and learning strategies among students to achieve the set goals. Emphasis was laid on teacher training and enabling them to become facilitators, encouraging students to discover solutions independently.  The UAE has come a long way since the beginning of the previous decade in taking concerted actions to not only reduce its carbon footprint but equip its next generation by involving schools in its planned journey. UAE schools have been encouraging the adoption of sustainability education into their curriculum, considering it a high priority. Schools have adopted Education for Sustainable Development (ESD) into their curriculum to address the urgent need to protect the environment and safeguard the planet’s biodiversity and natural resources. In 2022, Minister of Education has committed to implement the Green Education Partnership  in the UAE. Since then, the Ministry of Education has designed and developed a framework and roadmap to achieve all the Green Pillars KPI by the end of the COP 28..",
     },
     pillar4: {
       target: "20% of cities and communities have climate change lifelong learning.",
@@ -276,7 +278,7 @@ const Pillar1Card = ({ data }) => {
     return (
         <PillarCard 
             imageSrc={pillar1_image}
-            title="Greening Schools" 
+            title="Pillar 1: Greening Schools" 
             color={color}
         >
             <PillarTarget text={data.target} />
@@ -297,7 +299,7 @@ const Pillar2Card = ({ data }) => {
     return (
         <PillarCard 
             imageSrc={pillar2_image}
-            title="Greening Curriculum"
+            title="Pillar 2: Greening Curriculum"
             color={color}
         >
             <PillarTarget text={data.target} />
@@ -315,7 +317,7 @@ const Pillar3Card = ({ data }) => {
     return (
         <PillarCard 
             imageSrc={ pillar3_image}
-            title="Teacher Capacity"
+            title="Pillar 3: Teacher Capacity"
             color={color}
         >
             <PillarTarget text={data.target} />
@@ -336,7 +338,7 @@ const Pillar4Card = ({ data }) => {
     return (
         <PillarCard
             imageSrc={pillar4_image}
-            title="Greening Communities"
+            title="Pillar 4: Greening Communities"
             color={color}
         >
             <PillarTarget text={data.target} />
@@ -385,7 +387,7 @@ const SpotlightsCard = ({ text }) => (
     <Card className="h-full bg-slate-800 text-white">
         <h3 className="text-2xl font-bold mb-3 tracking-tight">Spotlights of Partner Work</h3>
         <div className="flex-grow">
-            <p className="text-slate-300 mb-4">This space will be built out to include stories from partner data and directly from the country, including links to impact stories, best practices, partner reports, and external sites.</p>
+            <p className="text-slate-300 mb-4">This space will be built out to include links to best practices, partner reports, and external sites.</p>
         </div>
         <div className={`mt-auto p-4 bg-slate-700 border-l-4 border-teal-400 rounded-r-lg`}>
           <p className="text-slate-200 italic text-sm">{text}</p>
@@ -437,6 +439,8 @@ export default function CountryProfilePage() {
                     </div>
                 </main>
             </div>
+            <ImpactStories />
+            <QuickLinksSection />
         </div>
     );
 }
