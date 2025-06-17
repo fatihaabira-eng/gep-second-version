@@ -69,7 +69,15 @@ const NavBar: React.FC = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center">
             <NavigationMenu className="mr-4">
-              <NavigationMenuList>
+              <NavigationMenuList><NavigationMenuItem>
+                  <Link to="#" className={cn(
+                    navigationMenuTriggerStyle(),
+                    "text-lg font-medium text-[#02585c] hover:text-[#6cb154] transition-colors duration-200",
+                    isActive("/about") ? "bg-[#6cb154]/10 text-[#6cb154] font-semibold" : ""
+                  )}>
+                    About
+                  </Link>
+                </NavigationMenuItem>
                 <NavigationMenuItem>
                   <Link to="/" className={cn(
                     navigationMenuTriggerStyle(),
@@ -127,15 +135,7 @@ const NavBar: React.FC = () => {
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <Link to="#" className={cn(
-                    navigationMenuTriggerStyle(),
-                    "text-lg font-medium text-[#02585c] hover:text-[#6cb154] transition-colors duration-200",
-                    isActive("/about") ? "bg-[#6cb154]/10 text-[#6cb154] font-semibold" : ""
-                  )}>
-                    About
-                  </Link>
-                </NavigationMenuItem>
+                
               </NavigationMenuList>
             </NavigationMenu>
           </div>
