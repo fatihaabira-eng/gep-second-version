@@ -386,12 +386,12 @@ const WorldMap = () => {
             <span className="text-gray-700 font-semibold">Legend:</span>
         </div>
         <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-[#00787D]"></span>
-            <span className="text-gray-700">ICESCO Member</span>
+            <span className="w-3 h-3 rounded-full bg-[#6cb154]"></span>
+            <span className="text-gray-700">UNESCO Member</span>
         </div>
         <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-[#6cb154]"></span>
-            <span className="text-gray-700">Unesco Member</span>
+            <span className="w-3 h-3 rounded-full bg-[#00787D]"></span>
+            <span className="text-gray-700">ICESCO Member</span>
         </div>
       </div>
 
