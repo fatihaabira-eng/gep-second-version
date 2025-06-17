@@ -391,7 +391,7 @@ const WorldMap = () => {
         </div>
         <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-[#6cb154]"></span>
-            <span className="text-gray-700">Other Countries</span>
+            <span className="text-gray-700">Unesco Member</span>
         </div>
       </div>
 
