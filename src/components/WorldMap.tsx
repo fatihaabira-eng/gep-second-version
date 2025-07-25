@@ -60,6 +60,15 @@ const countryData: CountryData[] = [
     coordinates: { longitude: 20.1683, latitude: 41.1533 },
     isIcesco: false
   },
+  {
+    id: 'ad',
+    name: 'Andorra',
+    isoCode: 'AL',
+    region: 'Southest Europe',
+    quickFact: 'A place for the quick facts',
+    coordinates: { longitude:1.5218 , latitude:42.5063 },
+    isIcesco: false
+  },
 ];
 
 const ICESCO_COUNTRIES = [

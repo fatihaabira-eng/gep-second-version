@@ -23,6 +23,12 @@ const countries: Country[] = [
     name: 'Albania',
     flag: 'https://flagcdn.com/w320/al.png',
     region: 'Southeast Europe'
+  },
+  {
+    id: 'ad',
+    name: 'Andorra',
+    flag: 'https://flagcdn.com/w320/ad.png',
+    region: 'Southwestern Europe'
   }
 ];
 
