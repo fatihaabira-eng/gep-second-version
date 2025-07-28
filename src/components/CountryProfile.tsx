@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { BookOpen, Building, ChevronDown, ExternalLink, ArrowLeft, Leaf, Users, Globe, Target, FileText, Award, Link2 } from 'lucide-react';
+// Since I cannot access local files, I'll use placeholders for images.
+// You can replace these with your actual image imports.
 import pillar1_image from '../imgs/pillar1.png';
 import pillar2_image from '../imgs/pillar2.png';
 import pillar3_image from '../imgs/pillar3.png';
 import pillar4_image from '../imgs/pillar4.png';
 import { useParams } from 'react-router-dom';
-import { QuickLinksSection } from './QuickLinks';
-import { ImpactStories } from './ImpactStories';
-
-// --- MOCK DATA ---
+// --- MOCK DATA (Unchanged) ---
 const countryData = {
   "uae": {
     "id": "uae",
@@ -142,14 +141,14 @@ const countryData = {
       { "question": "School Network?", "answer": "Yes" }
     ],
     "countryResponse": [
-      { "type": "paragraph", "content": "In Andorra, all 33 educational institutions are part of the Green Schools network and the government has developed awards to recognize outstanding work[13]." },
+      { "type": "paragraph", "content": "In Andorra, all 33 educational institutions are part of the Green Schools network and the government has developed awards to recognize outstanding work." },
       { "type": "heading", "content": "The Green School Programme" },
-      { "type": "paragraph", "content": "Launched in the 2010–2011 school year, this programme involves all 33 institutions and 11,314 students. It is guided by the government-funded 'Centre Andorra Sostenible' which provides workshops, training, and resources[13]." },
+      { "type": "paragraph", "content": "Launched in the 2010–2011 school year, this programme involves all 33 institutions and 11,314 students. It is guided by the government-funded 'Centre Andorra Sostenible' which provides workshops, training, and resources." },
       { "type": "list", "title": "The programme's objectives are:", "items": [
-          "Promote values and attitudes aligned with sustainable development[13].",
-          "Deepen knowledge of the environment and the conditions necessary for its preservation[13].",
-          "Optimize the management of the school as a sustainable infrastructure[13].",
-          "Promote a network for exchange and communication among schools[13]."
+          "Promote values and attitudes aligned with sustainable development.",
+          "Deepen knowledge of the environment and the conditions necessary for its preservation.",
+          "Optimize the management of the school as a sustainable infrastructure.",
+          "Promote a network for exchange and communication among schools."
       ]},
       { "type": "paragraph", "content": "To join the Greening School Programme, schools have followed the following process:" },
       { "type": "list", "title": "The programme's objectives are:", "items": [
@@ -185,15 +184,15 @@ const countryData = {
     ],
     "mecceGemrLink": "Not available or data not reviewed response",
     "countryResponse": [
-      { "type": "paragraph", "content": "The Ministry of Education considers education for sustainable development a cross-cutting approach, integrating its issues into the curriculum from primary school to high school. Concepts like climate change and biodiversity are incorporated throughout the students' journey[13]." },
+      { "type": "paragraph", "content": "The Ministry of Education considers education for sustainable development a cross-cutting approach, integrating its issues into the curriculum from primary school to high school. Concepts like climate change and biodiversity are incorporated throughout the students' journey." },
       { "type": "heading", "content": "Formació Andorrana (Andorran Education)" },
-      { "type": "paragraph", "content": "Since the French and Spanish education systems coexist in Andorra, the government provides the 'Formació Andorrana' programme to ensure all students learn about Andorra's specific natural environment and history. This programme addresses sustainable development through specific competencies and resources[13]." },
+      { "type": "paragraph", "content": "Since the French and Spanish education systems coexist in Andorra, the government provides the 'Formació Andorrana' programme to ensure all students learn about Andorra's specific natural environment and history. This programme addresses sustainable development through specific competencies and resources." },
       { "type": "heading", "content": "Education for Sustainable Development in the Andorran School System" },
       { "type": "list", "items": [
-          "Preschool (ages 4–5): Workshops on waste management and landscape conservation are conducted[13].",
-          "Primary school (ages 6–12): Activities include proposing measures to reduce the school's environmental impact, brainstorming ways to reduce food waste, and analyzing their ecological footprint[13].",
-          "Middle school (ages 13–15): Students study the transition to a new energy model in Andorra and evaluate the health of Andorran rivers[13].",
-          "High school (ages 16–18): Sustainable development is addressed on a global scale, with students analyzing issues like climate change, pollution, and deforestation[13]."
+          "Preschool (ages 4–5): Workshops on waste management and landscape conservation are conducted.",
+          "Primary school (ages 6–12): Activities include proposing measures to reduce the school's environmental impact, brainstorming ways to reduce food waste, and analyzing their ecological footprint.",
+          "Middle school (ages 13–15): Students study the transition to a new energy model in Andorra and evaluate the health of Andorran rivers.",
+          "High school (ages 16–18): Sustainable development is addressed on a global scale, with students analyzing issues like climate change, pollution, and deforestation."
       ]}
     ]
   },
@@ -210,9 +209,14 @@ const countryData = {
     "ndcEarthDayLink": "https://www.earthday.org/ndc-tracker/",
     "countryResponse": [
         { "type": "heading", "content": "Policy and Action Plans" },
-        { "type": "paragraph", "content": "Education for Sustainable Development is defined within the legislation that establishes the curriculum for the Andorran Education System[13]. A major milestone was the creation of the government-funded 'Andorra Sostenible' center in 2003 to promote sustainable development[13]. These efforts led to the 'Andorran Strategy for Environmental Education for Sustainability' in 2022, developed by the Ministries of Education and Environment[13]." },
+        { "type": "paragraph", "content": "Education for Sustainable Development in the Andorran Education System is defined within the legislation that establishes the curriculum from primary through to high school. It is central to subjects related to social sciences and constitutes a fundamental part of the educational mission of schools. For primary education (ages 6–11), the objective of this subject is to equip students with tools to understand the world around them and enable them to participate in it constructively. Particular attention is given to the social and solidarity economy. Primary – Social sciences curriculum:" },
+        { "type": "link", "content": "https://www.bopa.ad/bopa/033123/Documents/Annex%20II_GD20211119_10_51_54.pdf" },
+        { "type": "paragraph", "content": "In lower secondary education (ages 12–15), education for sustainable development is approached transversally to encourage students to ask questions about socioeconomic and environmental phenomena, seek possible answers, and evaluate the impact of such measures. The topics provide a global view of issues related to sustainable development: wealth distribution and social organization, environmental protection and responsible consumption, and migration movements. Secondary social sciences curriculum: " },
+        { "type": "link", "content": "https://www.educacio.ad/images/stories/estudis/2aEnsenyanca/Programa_CHS_compressed.pdf" },
+        { "type": "paragraph", "content": "In upper secondary education (ages 16–18), sustainable development is addressed in history, geography, and science & society subjects. Students deepen their reflection on the challenges involved in building a sustainable society from all perspectives. They analyze these issues by considering social relationships (power relations and social inequalities) and land management (urbanization trends, armed conflicts, population movements, climate change, etc.). This provides students with tools to develop a critical perspective at both local and global levels.Geography curriculum: " },
+        
         { "type": "heading", "content": "Teacher Training" },
-        { "type": "paragraph", "content": "At the University of Andorra, initial teacher training for both Bachelor's and Master's degrees in Education Sciences includes all issues related to sustainable development. The SDGs are at the core of the pedagogical model, ensuring sustainability is integrated throughout the curriculum for future teachers[13]." }
+        { "type": "paragraph", "content": "At the University of Andorra, initial teacher training for both Bachelor's and Master's degrees in Education Sciences includes all issues related to sustainable development. The SDGs are at the core of the pedagogical model, ensuring sustainability is integrated throughout the curriculum for future teachers." }
     ]
   },
   "pillar4": {
@@ -224,14 +228,14 @@ const countryData = {
     ],
     "unescoLearningCitiesLink": "Not available or data not reviewed response",
     "countryResponse": [
-      { "type": "paragraph", "content": "In Andorra, several actors work to support the development of climate-resilient communities through training and awareness programs[13]." },
+      { "type": "paragraph", "content": "In Andorra, several actors work to support the development of climate-resilient communities through training and awareness programs." },
       { "type": "heading", "content": "Key Actors and Initiatives" },
       { "type": "list", "items": [
-          "Ministry of Education: A lifelong learning center offers training courses to the general public on topics including climate change and natural resource use[13].",
-          "University of Andorra: Sustainable development is integrated into continuing education programmes for professionals from various economic sectors[13].",
-          "Andorra Recerca i Innovació: A multidisciplinary research center that shares knowledge with society to inform policy-making on climate change[13].",
-          "Local Municipalities: Organize communication and awareness programmes to highlight natural and cultural heritage[13].",
-          "Andorra Sostenible: A key organization responsible for promoting sustainable development education among the general population[13]."
+          "Ministry of Education: A lifelong learning center offers training courses to the general public on topics including climate change and natural resource use.",
+          "University of Andorra: Sustainable development is integrated into continuing education programmes for professionals from various economic sectors.",
+          "Andorra Recerca i Innovació: A multidisciplinary research center that shares knowledge with society to inform policy-making on climate change.",
+          "Local Municipalities: Organize communication and awareness programmes to highlight natural and cultural heritage.",
+          "Andorra Sostenible: A key organization responsible for promoting sustainable development education among the general population."
       ]}
     ]
   },
@@ -239,17 +243,16 @@ const countryData = {
 }
 };
 
-const getCountryProfileById = (id) => countryData[id] || null;
 
-// --- HELPER & UI COMPONENTS ---
-const Card = ({ children, className = '', isHoverable = false }) => (
-  <div className={`bg-white rounded-2xl shadow-sm border border-gray-200/60 p-6 flex flex-col h-full transition-all duration-300 ${isHoverable ? 'hover:shadow-lg hover:scale-[1.02]' : ''} ${className}`}>
+// --- HELPER & UI COMPONENTS (REDESIGNED) ---
+
+const Card = ({ children, className = '' }) => (
+  <div className={`bg-white rounded-2xl shadow-md border border-slate-200/70 p-6 flex flex-col h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${className}`}>
     {children}
   </div>
 );
 
 const StatusBadge = ({ status, className = '' }) => {
-    // Normalize status to handle different casing and potential null/undefined values
     const normalizedStatus = typeof status === 'string' ? status.toLowerCase() : 'data not reviewed';
 
     let bgColor = 'bg-gray-100 text-gray-800';
@@ -263,162 +266,131 @@ const StatusBadge = ({ status, className = '' }) => {
         bgColor = 'bg-red-100 text-red-900';
         dotColor = 'bg-red-500';
     } else {
-        text = "Data not reviewed"; // Standardize the text for this case
+        text = "Data not reviewed";
     }
     
-    // Specific case for IIEP analysis text
     if (normalizedStatus.includes('iiep')) {
         bgColor = 'bg-blue-100 text-blue-900';
         dotColor = 'bg-blue-500';
-        text = "Analysis pending"; // Friendlier text
+        text = "Analysis pending";
     }
 
-
     return (
-        <div className={`inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold ${bgColor} ${className}`}>
-            <span className={`w-2.5 h-2.5 mr-3 rounded-full ${dotColor}`}></span>
+        <div className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${bgColor} ${className}`}>
+            <span className={`w-2 h-2 mr-2 rounded-full ${dotColor}`}></span>
             {text}
         </div>
     );
 };
 
-const CountryResponseBox = ({ data, characterLimit = 150 }) => {
+// --- REDESIGNED CountryResponseBox with smooth transition ---
+const CountryResponseBox = ({ data, characterLimit = 200 }) => {
     const [isExpanded, setIsExpanded] = useState(false);
+    const contentRef = useRef(null);
 
-    const toggleIsExpanded = (e) => {
-        e.preventDefault();
-        setIsExpanded(!isExpanded);
-    };
-
-    // Convert all structured content to a raw text preview for collapsed mode
-    const extractTextContent = () => {
-        if (typeof data === 'string') return data;
-
-        if (Array.isArray(data)) {
-            return data
-                .map((item) => {
-                    if (item.type === 'heading' || item.type === 'paragraph') {
-                        return item.content;
-                    } else if (item.type === 'list') {
-                        return `${item.title || ''} ${item.items?.join(' ') || ''}`;
-                    } else {
-                        return '';
-                    }
-                })
-                .join(' ');
+    const extractTextContent = (d) => {
+        if (typeof d === 'string') return d;
+        if (Array.isArray(d)) {
+            return d.map(item => {
+                if (item.type === 'heading' || item.type === 'paragraph') return item.content;
+                if (item.type === 'list') return `${item.title || ''} ${item.items?.join(' ') || ''}`;
+                return '';
+            }).join(' ');
         }
-
         return '';
     };
 
-    const rawText = extractTextContent();
+    const rawText = extractTextContent(data);
     const isLongText = rawText.length > characterLimit;
-    const displayText = isExpanded
-        ? null
-        : `${rawText.substring(0, characterLimit)}${isLongText ? '...' : ''}`;
+
+    // Render the detailed content based on its structure
+    const renderContent = () => {
+        if (Array.isArray(data)) {
+            return data.map((item, index) => {
+                switch (item.type) {
+                    case 'heading':
+                        return <h3 key={index} className="text-md font-bold text-gray-800 pt-2">{item.content}</h3>;
+                    case 'paragraph':
+                        return <p key={index} className="text-sm text-gray-700 leading-relaxed">{item.content}</p>;
+                    case 'list':
+                        return (
+                            <div key={index}>
+                                {item.title && <h4 className="text-sm font-semibold text-gray-700 mb-1">{item.title}</h4>}
+                                <ul className="list-disc list-inside space-y-1 pl-2">
+                                    {item.items.map((li, i) => <li key={i} className="text-sm text-gray-700 leading-relaxed">{li}</li>)}
+                                </ul>
+                            </div>
+                        );
+                    case 'link':
+                        return (
+                            <p key={index} className="text-sm text-teal-600 underline break-words">
+                                <a href={item.content} target="_blank" rel="noopener noreferrer">{item.content}</a>
+                            </p>
+                        );
+                    default: return null;
+                }
+            });
+        }
+        return <p className="text-sm text-gray-700 leading-relaxed italic">{data}</p>;
+    };
 
     return (
         <div className="mt-auto pt-4">
-            <div className="p-4 bg-slate-50 rounded-lg border-l-4 border-slate-200">
-                {isExpanded ? (
-                    <div className="text-left space-y-3">
-                        {Array.isArray(data) ? (
-                            data.map((item, index) => {
-                                switch (item.type) {
-                                    case 'heading':
-                                        return (
-                                            <h3 key={index} className="text-md font-bold text-gray-800 pt-2">
-                                                {item.content}
-                                            </h3>
-                                        );
-                                    case 'paragraph':
-                                        return (
-                                            <p key={index} className="text-sm text-gray-700 leading-relaxed">
-                                                {item.content}
-                                            </p>
-                                        );
-                                    case 'list':
-                                        return (
-                                            <div key={index}>
-                                                {item.title && (
-                                                    <h4 className="text-sm font-semibold text-gray-700 mb-1">
-                                                        {item.title}
-                                                    </h4>
-                                                )}
-                                                <ul className="list-disc list-inside space-y-1 pl-2">
-                                                    {item.items.map((listItem, i) => (
-                                                        <li key={i} className="text-sm text-gray-700 leading-relaxed">
-                                                            {listItem}
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        );
-                                    case 'link':
-                                        return (
-                                            <p key={index} className="text-sm text-blue-600 underline">
-                                                <a href={item.content} target="_blank" rel="noopener noreferrer">
-                                                    {item.content}
-                                                </a>
-                                            </p>
-                                        );
-                                    default:
-                                        return null;
-                                }
-                            })
-                        ) : (
-                            <p className="text-sm text-gray-700 leading-relaxed italic">{data}</p>
-                        )}
+            <div className="bg-slate-50/80 rounded-xl border border-slate-200/80">
+                <div 
+                    className="transition-[max-height] duration-700 ease-in-out overflow-hidden"
+                    style={{ maxHeight: isExpanded ? contentRef.current?.scrollHeight + 40 : 0 }}
+                >
+                    <div ref={contentRef} className="p-4 space-y-3">
+                        {renderContent()}
                     </div>
-                ) : (
-                    <p className="text-sm text-gray-700 italic">{displayText}</p>
-                )}
+                </div>
 
-                {isLongText && (
-                    <a
-                        href="#"
-                        onClick={toggleIsExpanded}
-                        className="text-teal-600 hover:text-teal-800 text-sm font-semibold mt-2 inline-block"
+                {isLongText ? (
+                     <button
+                        onClick={() => setIsExpanded(!isExpanded)}
+                        className="w-full text-left text-teal-700 hover:bg-slate-200/60 text-sm font-semibold p-3 flex justify-between items-center transition-colors"
                     >
-                        {isExpanded ? 'Read Less' : 'Learn More'}
-                    </a>
+                        <span>{isExpanded ? 'Show Less' : 'Learn More'}</span>
+                        <ChevronDown size={18} className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+                    </button>
+                ) : (
+                    <div className="p-4 space-y-3">
+                        {renderContent()}
+                    </div>
                 )}
             </div>
         </div>
     );
 };
 
+
 const LinkButton = ({ href, text, icon: Icon }) => (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm text-teal-600 hover:text-teal-800 font-semibold transition-colors group">
+    <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm text-teal-600 hover:text-teal-800 font-medium transition-colors group">
         <Icon size={16} className="mr-2 text-teal-500" />
         <span className="group-hover:underline">{text}</span>
-        <ExternalLink size={14} className="ml-1.5 opacity-70 group-hover:opacity-100" />
+        <ExternalLink size={14} className="ml-1.5 opacity-60 group-hover:opacity-100 transition-opacity" />
     </a>
 );
 
 const PillarTarget = ({ text }) => (
-    <div className="flex items-start gap-3 text-teal-800 bg-teal-50 rounded-lg p-3 mb-5 border border-teal-200/50">
-        <Target size={20} className="text-teal-500 flex-shrink-0 mt-0.5" />
-        <p className="text-xs font-semibold"><span className="font-bold mr-1">Target:</span>{text}</p>
+    <div className="flex items-start gap-3 text-teal-900 bg-teal-50 rounded-lg p-3 mb-5 border border-teal-200/60">
+        <Target size={20} className="text-teal-600 flex-shrink-0 mt-0.5" />
+        <p className="text-xs font-medium"><span className="font-bold mr-1">Target:</span>{text}</p>
     </div>
 );
+
 const PillarQuestion = ({ item }) => (
     <div className="py-3 border-b border-gray-100 last:border-b-0">
-        <div className="flex items-center justify-between">
-            <p className="text-sm font-medium text-gray-600 pr-4">{item.question}</p>
+        <div className="flex items-center justify-between gap-4">
+            <p className="text-sm font-medium text-gray-600">{item.question}</p>
             <StatusBadge status={item.answer} />
         </div>
-        {item.explanation && (
-            <div className="mt-2 pl-2 text-xs text-gray-500 italic">
-                - {item.explanation}
-            </div>
-        )}
+        {item.explanation && <p className="mt-2 pl-1 text-xs text-gray-500 italic">"{item.explanation}"</p>}
         {item.schemes && item.answer.toLowerCase() === 'yes' && (
             <div className="mt-2 pl-4">
                 <ul className="list-disc list-inside space-y-1">
-                    {item.schemes.map((scheme, index) => (
-                        <li key={index} className="text-xs text-gray-600">{scheme}</li>
-                    ))}
+                    {item.schemes.map((scheme, index) => <li key={index} className="text-xs text-gray-600">{scheme}</li>)}
                 </ul>
             </div>
         )}
@@ -427,17 +399,17 @@ const PillarQuestion = ({ item }) => (
 
 const CountryProfileHeader = ({ countryName, isMember }) => (
   <div className="relative bg-gradient-to-br from-teal-600 to-green-600 text-white rounded-3xl p-8 md:p-12 mb-12 overflow-hidden">
-    <div className="absolute inset-0 bg-black/10"></div>
+    <div className="absolute inset-0 opacity-10" style={{backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`}}></div>
     <div className="relative z-10">
-        <a href="/countries"  className="inline-flex items-center text-sm text-white/80 hover:text-white mb-6 transition-colors">
-            <ArrowLeft size={16} className="mr-2" />
+        <a href="/countries" className="inline-flex items-center text-sm text-white/80 hover:text-white mb-6 transition-colors group">
+            <ArrowLeft size={16} className="mr-2 group-hover:-translate-x-1 transition-transform" />
             Back to Countries List
         </a>
         <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">{countryName}</h1>
     </div>
     {isMember && (
-        <div className="absolute top-8 right-8 z-10 bg-white/20 backdrop-blur-sm text-white text-base font-semibold px-5 py-2.5 rounded-full inline-flex items-center border border-white/30">
-            <Leaf size={18} className="mr-2.5" />
+        <div className="absolute top-8 right-8 z-10 bg-white/20 backdrop-blur-sm text-white text-sm font-semibold px-4 py-2 rounded-full inline-flex items-center border border-white/30">
+            <Leaf size={16} className="mr-2" />
             GEP Member
         </div>
     )}
@@ -445,19 +417,17 @@ const CountryProfileHeader = ({ countryName, isMember }) => (
 );
 
 const PillarCard = ({ imageSrc, title, children, color }) => (
-    <Card isHoverable={true}>
-        <div className="flex items-start justify-between mb-4">
-            <div className='flex items-center'>
-                 <div className="bg-white p-2 rounded-2xl mr-4 shadow-sm border border-gray-100">
-                    <img 
-                        src={imageSrc} 
-                        alt={`${title} icon`} 
-                        className="w-14 h-14 object-contain"
-                        onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/64x64/eee/ccc?text=Img`; }}
-                    />
-                </div>
-                <h3 className="text-2xl font-bold tracking-tight" style={{ color: color }}>{title}</h3>
+    <Card>
+        <div className="flex items-center mb-4">
+             <div className="bg-[#F1F4F6] p-3 rounded-xl mr-4 border border-slate-200/80 shadow-sm">
+                <img 
+                    src={imageSrc} 
+                    alt={`${title} icon`} 
+                    className="w-12 h-12 object-contain"
+                    onError={(e) => { e.currentTarget.src = `https://placehold.co/64x64/eee/ccc?text=Img`; }}
+                />
             </div>
+            <h3 className="text-xl font-bold tracking-tight" style={{ color }}>{title}</h3>
         </div>
         <div className="flex flex-col flex-grow mt-2">
             {children}
@@ -465,154 +435,125 @@ const PillarCard = ({ imageSrc, title, children, color }) => (
     </Card>
 );
 
-const Pillar1Card = ({ data }) => {
-    const color = "#6FAC44";
-    return (
-        <PillarCard 
-            imageSrc={pillar1_image}
-            title="Pillar 1: Greening Schools" 
-            color={color}
-        >
-            <PillarTarget text={data.target} />
-            <div className="text-center my-4">
-                <p className="text-7xl font-extrabold" style={{ color: "#6FAC44" }}>{data.greenSchoolsCount.toLocaleString()}</p>
-                <p className="text-base text-gray-500 mt-2 font-medium">Number of Green Schools</p>
-            </div>
-            <div className="space-y-1 mb-4">
-                {data.questions.map((q, i) => <PillarQuestion key={i} item={q} />)}
-            </div>
-            <CountryResponseBox data={data.countryResponse} />
-        </PillarCard>
-    );
-};
+const Pillar1Card = ({ data }) => (
+    <PillarCard imageSrc={pillar1_image} title="Greening Schools" color="#6FAC44">
+        <PillarTarget text={data.target} />
+        <div className="text-center my-4">
+            <p className="text-6xl font-extrabold" style={{ color: "#6FAC44" }}>{data.greenSchoolsCount.toLocaleString()}</p>
+            <p className="text-sm text-gray-500 mt-1 font-medium">Number of Green Schools</p>
+        </div>
+        <div className="space-y-1 mb-4">
+            {data.questions.map((q, i) => <PillarQuestion key={i} item={q} />)}
+        </div>
+        <CountryResponseBox data={data.countryResponse} />
+    </PillarCard>
+);
 
-const Pillar2Card = ({ data }) => {
-    const color = "#5DAF8B";
-    return (
-        <PillarCard 
-            imageSrc={pillar2_image}
-            title="Pillar 2: Greening Curriculum"
-            color={color}
-        >
-            <PillarTarget text={data.target} />
-            <div className="space-y-1 mb-4">
-                {data.questions.map((q, i) => <PillarQuestion key={i} item={q} />)}
-            </div>
-            {data.mecceGemrLink && ( <LinkButton href={data.mecceGemrLink} text="View MECCE/GEMR Profile" icon={Link2} /> )}
-            <CountryResponseBox data={data.countryResponse} />
-        </PillarCard>
-    );
-};
+const Pillar2Card = ({ data }) => (
+    <PillarCard imageSrc={pillar2_image} title="Greening Curriculum" color="#5DAF8B">
+        <PillarTarget text={data.target} />
+        <div className="space-y-1 my-4">
+            {data.questions.map((q, i) => <PillarQuestion key={i} item={q} />)}
+        </div>
+        {data.mecceGemrLink && <LinkButton href={data.mecceGemrLink} text="View MECCE/GEMR Profile" icon={Link2} />}
+        <CountryResponseBox data={data.countryResponse} />
+    </PillarCard>
+);
 
-const Pillar3Card = ({ data }) => {
-    const color = "#085658";
-    return (
-        <PillarCard 
-            imageSrc={ pillar3_image}
-            title="Pillar 3: Teacher Capacity"
-            color={color}
-        >
-            <PillarTarget text={data.target} />
-            <div className="space-y-1 mb-4">
-                {data.questions.map((q, i) => <PillarQuestion key={i} item={q} />)}
-            </div>
-            <div className="mt-4 space-y-2">
-                {data.ndcLink && <LinkButton href={data.ndcLink} text="Country NDC Document" icon={FileText} />}
-                {data.ndcEarthDayLink && <LinkButton href={data.ndcEarthDayLink} text="EarthDay.org NDC Analysis" icon={FileText} />}
-            </div>
-            <CountryResponseBox data={data.countryResponse}  />
-        </PillarCard>
-    );
-};
+const Pillar3Card = ({ data }) => (
+    <PillarCard imageSrc={pillar3_image} title="Teacher Capacity" color="#085658">
+        <PillarTarget text={data.target} />
+        <div className="space-y-1 my-4">
+            {data.questions.map((q, i) => <PillarQuestion key={i} item={q} />)}
+        </div>
+        <div className="mt-4 space-y-3">
+            {data.ndcLink && <LinkButton href={data.ndcLink} text="Country NDC Document" icon={FileText} />}
+            {data.ndcEarthDayLink && <LinkButton href={data.ndcEarthDayLink} text="EarthDay.org NDC Analysis" icon={FileText} />}
+        </div>
+        <CountryResponseBox data={data.countryResponse} />
+    </PillarCard>
+);
 
-const Pillar4Card = ({ data }) => {
-    const color = "#56813A";
-    return (
-        <PillarCard
-            imageSrc={pillar4_image}
-            title="Pillar 4: Greening Communities"
-            color={color}
-        >
-            <PillarTarget text={data.target} />
-            <div className="text-center my-4">
-                <p className="text-7xl font-extrabold" style={{ color: "#56813A" }}>
+const Pillar4Card = ({ data }) => (
+    <PillarCard imageSrc={pillar4_image} title="Greening Communities" color="#56813A">
+        <PillarTarget text={data.target} />
+        <div className="text-center my-4">
+            <p className="text-6xl font-extrabold" style={{ color: "#56813A" }}>
                 {typeof data.citiesWithLifelongLearningProgramsCount === 'number' ? data.citiesWithLifelongLearningProgramsCount : 'N/A'}
-                </p>
-                <p className="text-base text-gray-500 mt-2 font-medium">Cities with Lifelong Learning</p>
-                <p className="text-sm text-gray-500 mt-1">({data.learningCities.join(', ')})</p>
-            </div>
-            <div className="space-y-1 mb-4">
-                {data.questions.map((q, i) => <PillarQuestion key={i} item={q} />)}
-            </div>
-            {data.unescoLearningCitiesLink && (
-                <div className="mb-4"> <LinkButton href={data.unescoLearningCitiesLink} text="UNESCO Learning Cities Network" icon={Link2} /> </div>
-            )}
-            <CountryResponseBox data={data.countryResponse}  />
-        </PillarCard>
-    );
-};
+            </p>
+            <p className="text-sm text-gray-500 mt-1 font-medium">Cities with Lifelong Learning</p>
+            <p className="text-xs text-gray-500 mt-1">({data.learningCities.join(', ')})</p>
+        </div>
+        <div className="space-y-1 mb-4">
+            {data.questions.map((q, i) => <PillarQuestion key={i} item={q} />)}
+        </div>
+        {data.unescoLearningCitiesLink && (
+            <div className="mb-4"> <LinkButton href={data.unescoLearningCitiesLink} text="UNESCO Learning Cities Network" icon={Link2} /> </div>
+        )}
+        <CountryResponseBox data={data.countryResponse} />
+    </PillarCard>
+);
 
 const GepMemberListCard = ({ organizations }) => (
     <Card id="gep-membership-list" className="bg-gradient-to-br from-green-50 to-teal-50">
         <h3 className="text-2xl font-bold text-gray-800 mb-2">GEP Member Organizations ({organizations.length})</h3>
-        <p className="text-sm text-gray-600 mb-5">List of official Greening Education Partnership member organizations in this country.</p>
-
+        <p className="text-sm text-gray-600 mb-6">Official Greening Education Partnership member organizations in this country.</p>
         {organizations.length > 0 && (
-        <details className="group">
-          <summary className="flex items-center justify-between p-4 bg-white/70 rounded-xl cursor-pointer hover:bg-white transition-colors shadow-sm">
-            <span className="font-semibold text-gray-800">View Member List</span>
-            <ChevronDown size={20} className="text-gray-600 group-open:rotate-180 transition-transform" />
-          </summary>
-          <ul className="mt-3 p-3 max-h-80 overflow-y-auto border rounded-lg bg-white/80 space-y-1">
-            {organizations.map((org, index) => (
-              <li key={index} className="text-sm text-gray-800 py-2 px-3 hover:bg-white/90 rounded-md font-medium">
-                {org}
-              </li>
-            ))}
-          </ul>
-        </details>
-        )} 
+            <details className="group">
+                <summary className="list-none flex items-center justify-between p-4 bg-white/80 rounded-xl cursor-pointer hover:bg-white transition-colors shadow-sm">
+                    <span className="font-semibold text-gray-800">View Member List</span>
+                    <ChevronDown size={20} className="text-gray-500 group-open:rotate-180 transition-transform" />
+                </summary>
+                <ul className="mt-2 p-2 max-h-80 overflow-y-auto border rounded-lg bg-white/60 space-y-1">
+                    {organizations.map((org, index) => (
+                        <li key={index} className="text-sm text-gray-800 py-2 px-3 hover:bg-white/90 rounded-md font-medium">
+                            {org}
+                        </li>
+                    ))}
+                </ul>
+            </details>
+        )}
     </Card>
 );
 
 const SpotlightsCard = ({ text }) => (
-    <Card className="h-full bg-slate-800 text-white">
-        <h3 className="text-2xl font-bold mb-3 tracking-tight">Spotlights of Partner Work</h3>
+    <Card className="h-full bg-slate-800 text-white bg-[#085656] from-slate-800 to-slate-900">
+        <h3 className="text-2xl font-bold mb-3 tracking-tight text-white">Spotlights of Partner Work</h3>
         <div className="flex-grow">
             <p className="text-slate-300 mb-4">This space will be built out to include links to best practices, partner reports, and external sites.</p>
         </div>
-        <div className={`mt-auto p-4 bg-slate-700 border-l-4 border-teal-400 rounded-r-lg`}>
-          <p className="text-slate-200 italic text-sm">{text}</p>
+        <div className={`mt-auto p-4 bg-[#085656] border-l-4 border-white/100 rounded-r-lg`}>
+            <p className="text-slate-200 italic text-sm">{text}</p>
         </div>
     </Card>
 );
 
 // --- THE MAIN PAGE COMPONENT ---
-export default function CountryProfilePage() {
+export default function App() {
+    // In a real app, you'd use useParams from react-router-dom
+    // For this example, we'll hardcode the ID.
     const { id } = useParams<{ id: string }>();
     const countryId = id as string;
     const country = countryId && countryData[countryId] ? countryData[countryId] : null;
-    // const countryStories = countryId && countryImpactStories[countryId] ? countryImpactStories[countryId] : [];
 
-   if (!country) {
+    if (!country) {
         return (
-            <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-                 <div className="p-8 font-bold text-center">
-                     <h1 className="text-3xl text-red-500 mb-4">Country Not Found</h1>
-                     <p className="text-gray-600">The requested country profile could not be loaded.</p>
-                      <a href="#" onClick={(e) => { e.preventDefault(); window.history.pushState({}, '', '/country/uae'); window.dispatchEvent(new PopStateEvent('popstate')); }} className="mt-6 inline-block bg-teal-600 text-white font-bold py-2 px-4 rounded hover:bg-teal-700">
-                        View UAE Profile
-                      </a>
+            <div className="min-h-screen bg-slate-100 flex items-center justify-center font-sans">
+                <div className="p-8 text-center">
+                    <h1 className="text-3xl font-bold text-red-500 mb-4">Country Not Found</h1>
+                    <p className="text-gray-600">The requested country profile could not be loaded.</p>
+                    <a href="#" onClick={(e) => e.preventDefault()} className="mt-6 inline-block bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">
+                        Return to search
+                    </a>
                 </div>
             </div>
-        )
+        );
     }
     
     return (
-        <div className="min-h-screen bg-slate-50 font-sans">
+        <div className="min-h-screen bg-slate-100 font-sans">
             <div className="container mx-auto px-4 lg:px-8 py-12">
                 <CountryProfileHeader countryName={country.name} isMember={country.isGEPMember} />
-
                 <main>
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mb-8">
                         <Pillar1Card data={country.pillar1} />
@@ -631,8 +572,9 @@ export default function CountryProfilePage() {
                     </div>
                 </main>
             </div>
-            <ImpactStories />
-            <QuickLinksSection />
+            {/* These would be your other components */}
+            {/* <ImpactStories /> */}
+            {/* <QuickLinksSection /> */}
         </div>
     );
 }
