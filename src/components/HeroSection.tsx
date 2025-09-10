@@ -1,21 +1,30 @@
 import React from 'react';
+import backgroundImage from "../imgs/Background-silvertree.png";
 
 const HeroSection = () => {
   return (
-    <div className="relative mt-2 mb-4 bg-gep-hero text-white rounded-2xl overflow-hidden shadow-2xl">
+    <div 
+      className="relative mt-2 mb-4 text-white rounded-2xl overflow-hidden shadow-2xl"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
       {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/5 rounded-full animate-float"></div>
         <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-gep-green-400/10 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
         <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-gep-orange-400/10 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
-      </div>
+      </div> */}
 
       <div className="relative max-w-l mx-auto py-6 px-4 md:py-8 md:px-6">
         <div className="text-center mb-4 animate-fade-in">
-          <h1 className="font-poppins text-2xl md:text-4xl font-bold mb-4 leading-snug">
+          <h1 className="font-primary text-2xl md:text-4xl font-bold mb-4 leading-snug">
             Greening Education in Action
           </h1>
-          <p className="font-inter text-base md:text-lg mb-4 max-w-3xl mx-auto opacity-90 leading-normal">
+          <p className="font-primary text-base md:text-lg mb-4 max-w-3xl mx-auto opacity-90 leading-normal">
             Tracking global progress on transforming education systems to address climate change 
             and support sustainable development through the Greening Education Partnership.
           </p>

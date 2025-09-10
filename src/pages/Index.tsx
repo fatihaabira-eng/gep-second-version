@@ -51,15 +51,15 @@ const PillarCard = ({ pillar }) => {
       {/* Increased margin-bottom */}
       <div className="mb-6">
         {/* Slightly thicker progress bar */}
-        <div className="w-full bg-gray-200 rounded-full h-5 my-3">
+        <div className="w-full bg-gray-200 rounded-full h-3 my-3">
           {/* Matching thickness */}
           <div
-            className="bg-[#16A34A] h-3 rounded-full"
+            className="bg-[#00b1eb] h-3 rounded-full"
             style={{ width: `${percentage}%` }}
             title={`${percentage.toFixed(1)}%`}
           ></div>
         </div>
-        <p className="text-gray-800 text-sm font-medium">
+        <p className="text-[#00b1eb] text-sm font-medium">
           <span className="font-bold">{pillar.current.toLocaleString()}</span> / {pillar.total.toLocaleString()} {pillar.unit}
         </p>
         {/* Increased margin-top */}
@@ -71,7 +71,7 @@ const PillarCard = ({ pillar }) => {
       <a
         href={pillar.link}
         // Increased padding-y
-        className="mt-auto block text-center bg-[#16A34A] text-white px-6 py-3 rounded-lg text-md font-semibold hover:bg-[#15803d] transition-colors duration-300 shadow-sm"
+        className="mt-auto block text-center bg-[#70AD45] text-white px-6 py-3 rounded-lg text-md font-semibold hover:bg-[#15803d] transition-colors duration-300 shadow-sm"
       >
         Learn More
       </a>
@@ -238,7 +238,7 @@ const GlobalDashboard = () => {
     return (
         <div className="px-4 bg-gray-50">
             <HeroSection />
-            <GEPIntroSection />
+            {/* <GEPIntroSection /> */}
 
             {/* Interactive Map Section */}
             {/* --- New Combined Map and Pillars Section --- */}

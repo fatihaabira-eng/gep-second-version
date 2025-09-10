@@ -1,5 +1,3 @@
-
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -71,7 +69,7 @@ export default {
 					200: '#80C0D5',
 					300: '#4DA7C4',
 					400: '#1A8EB3',
-					500: '#1B4B5C', // Main dark blue from logo
+					500: '#1B4B5C',
 					600: '#164049',
 					700: '#113437',
 					800: '#0C2824',
@@ -83,7 +81,7 @@ export default {
 					200: '#B8DE96',
 					300: '#9CD16D',
 					400: '#80C444',
-					500: '#7DB343', // Main green from logo
+					500: '#7DB343',
 					600: '#649036',
 					700: '#4B6D29',
 					800: '#324A1C',
@@ -95,7 +93,7 @@ export default {
 					200: '#F3CC96',
 					300: '#EEB86D',
 					400: '#E9A444',
-					500: '#E67E22', // Orange accent from logo
+					500: '#E67E22',
 					600: '#B8651B',
 					700: '#8A4C14',
 					800: '#5C330D',
@@ -107,7 +105,7 @@ export default {
 					200: '#80D9D1',
 					300: '#4DCABF',
 					400: '#1ABBAD',
-					500: '#0f7378', // Current teal used in design
+					500: '#0f7378',
 					600: '#0C5C60',
 					700: '#094548',
 					800: '#062E30',
@@ -115,6 +113,7 @@ export default {
 				}
 			},
 			fontFamily: {
+				'primary': ['Myriad Pro', 'sans-serif'],
 				'poppins': ['Poppins', 'sans-serif'],
 				'inter': ['Inter', 'sans-serif'],
 			},

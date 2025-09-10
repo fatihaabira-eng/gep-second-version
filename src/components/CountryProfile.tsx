@@ -7,6 +7,8 @@ import pillar2_image from '../imgs/pillar2.png';
 import pillar3_image from '../imgs/pillar3.png';
 import pillar4_image from '../imgs/pillar4.png';
 import { useParams } from 'react-router-dom';
+import { ImpactStories } from './ImpactStories';
+import { QuickLinksSection } from './QuickLinks';
 // --- MOCK DATA (Unchanged) ---
 const countryData = {
   "uae": {
@@ -33,8 +35,8 @@ const countryData = {
     "pillar2": {
       "target": "90% of countries green national curriculum",
       "questions": [
+        { "question": "Is climate change education included in the National Curriculum Framework", "answer": "N/A" },
         { "question": "National curriculum includes sustainable development?", "answer": "Yes" },
-        { "question": "National curriculum includes climate change?", "answer": "Yes" },
         { "question": "National curriculum includes biodiversity?", "answer": "Yes" },
         { "question": "Planning curriculum reform in next 3 years?", "answer": "Yes" },
         { "question": "Interested in a curriculum review?", "answer": "Yes" }
@@ -43,10 +45,10 @@ const countryData = {
       "countryResponse": "We have developed a cross-curriculum framework which tackles 23 different curriculums with 4 different topics: Energy Biodiversity and Biosphere Climate Change and consumption Innovation and sustainability. The Ministry of Education has committed to implement the Green Education Partnership in the UAE and aims to implement the cross-curriculum framework in all UAE schools Starting September 2023."
     },
     "pillar3": {
-      "target": "50% of countries have education in their NDCs to UNFCCC.",
+      "target": "The target is still under review by the Pillar 3 Working Group",
       "questions": [
-        { "question": "Education in NDCs?", "answer": "Yes" },
-        { "question": "Climate education in ESPs?", "answer": "Analysis to be done by UNESCO IIEP" },
+        { "question": "Is education reflected in the Nationally Determined Contributions (NDC) to United Nations Framework Convention on Climate Change (UNFCCC)", "answer": "Yes" },
+        { "question": "Education for sustainable development and climate education in Education Sector Plans", "answer": "Analysis to be done by UNESCO IIEP" },
         { "question": "Legislation on sustainable education?", "answer": "No", "explanation": "As part of the NDC, we are aiming to put Green Education at the core of UAE’s NDC." },
         { "question": "Policy/action plan for sustainable education?", "answer": "Yes" },
         { "question": "Pre-service/in-service training on sustainability?", "answer": "Yes" },
@@ -57,11 +59,11 @@ const countryData = {
       "countryResponse": "In 2009 the UAE launched the Sustainable Schools Initiative – an interactive and participatory approach among both public and private schools. The initiative aimed to achieve measurable outcomes in efficient use of resources and adoption of new teaching and learning strategies among students to achieve the set goals. Emphasis was laid on teacher training and enabling them to become facilitators, encouraging students to discover solutions independently.  The UAE has come a long way since the beginning of the previous decade in taking concerted actions to not only reduce its carbon footprint but equip its next generation by involving schools in its planned journey. UAE schools have been encouraging the adoption of sustainability education into their curriculum, considering it a high priority. Schools have adopted Education for Sustainable Development (ESD) into their curriculum to address the urgent need to protect the environment and safeguard the planet’s biodiversity and natural resources. In 2022, Minister of Education has committed to implement the Green Education Partnership  in the UAE. Since then, the Ministry of Education has designed and developed a framework and roadmap to achieve all the Green Pillars KPI by the end of the COP 28.."
     },
     "pillar4": {
-      "target": "20% of cities and communities have climate change lifelong learning.",
+      "target": "The target is still under review by the Pillar 4 Working Group",
       "citiesWithLifelongLearningProgramsCount": 1,
       "learningCities": ["Ras Al Khaimah"],
       "questions": [
-        { "question": "National/local policies for climate-resilient communities?", "answer": "No" }
+        { "question": "Are there national or local policies in building climate-resilient communities through lifelong learning? ", "answer": "No" }
       ],
       "unescoLearningCitiesLink": "https://www.uil.unesco.org/en/learning-cities/map?fq%5Bsm_unsc_field_ref_countries_label%5D%5B%5D=United+Arab+Emirates",
       "countryResponse": "We are developing policies and guidelines by building different abstract community engagement model for all Emirates."
@@ -86,8 +88,8 @@ const countryData = {
     "pillar2": {
       "target": "90% of countries green national curriculum",
       "questions": [
+        { "question": "Is climate change education included in the National Curriculum Framework", "answer": "N/A" },
         { "question": "National curriculum includes sustainable development?", "answer": "Yes" },
-        { "question": "National curriculum includes climate change?", "answer": "Yes" },
         { "question": "National curriculum includes biodiversity?", "answer": "Yes" },
         { "question": "Planning curriculum reform in next 3 years?", "answer": "No" },
         { "question": "Interested in a curriculum review?", "answer": "No" }
@@ -96,10 +98,10 @@ const countryData = {
       "countryResponse": "Knowledges related to the environment and sustainable development such as biodiversity and its conservation, climate change, the environment and its protection, natural resources and their sustainable use, etc. are included in learning areas and subjects such as \"Society and Environment\", \"Natural Sciences\", etc. in all levels of pre-university education. Also, placing a special focus on climate change, the module \"Man and climate change\" has been included as part of the optional curriculum in upper secondary education."
     },
     "pillar3": {
-      "target": "50% of the countries have education in their NDCs to UNFCCC.",
+      "target": "The target is still under review by the Pillar 3 Working Group.",
       "questions": [
-        { "question": "Education in NDCs?", "answer": "No" },
-        { "question": "Climate education in ESPs?", "answer": "Analysis to be done by UNESCO IIEP" },
+        { "question": "Is education reflected in the Nationally Determined Contributions (NDC) to United Nations Framework Convention on Climate Change (UNFCCC)", "answer": "No" },
+        { "question": "Education for sustainable development and climate education in Education Sector Plans", "answer": "Analysis to be done by UNESCO IIEP" },
         { "question": "Legislation on sustainable education?", "answer": "No" },
         { "question": "Policy/action plan for sustainable education?", "answer": "No" },
         { "question": "Pre-service/in-service training on sustainability?", "answer": "Yes" },
@@ -110,11 +112,11 @@ const countryData = {
       "countryResponse": "The law on the pre-university education system defines that one of its goals is for students to develop responsibility towards the environment. Learning about the environment and sustainable development has become an integral part of the curriculum. The competency-based curriculum aims to develop students who are competent to understand the interconnection of economic, political and social phenomena and contribute to sustainable development. \"Learning Standards - Education for Sustainable Development\" (2018) define a system of requirements for sustainable development issues that serve as reference points for teachers."
     },
     "pillar4": {
-      "target": "20% of cities and communities have at least one climate change lifelong learning programme.",
+      "target": "The target is still under review by the Pillar 4 Working Group",
       "citiesWithLifelongLearningProgramsCount": "Data not reviewed",
       "learningCities": ["Data not reviewed"],
       "questions": [
-        { "question": "National/local policies for climate-resilient communities?", "answer": "Yes" }
+        { "question": "Are there national or local policies in building climate-resilient communities through lifelong learning? ", "answer": "Yes" }
       ],
       "unescoLearningCitiesLink": "https://www.uil.unesco.org/en/learning-cities/map?query=&hub=38",
       "countryResponse": "At the national level, the National Strategy for Development and Integration 2020-2030 is the main strategic document. At the local level, municipalities have developed policies and strategies related to the education of communities and the engagement of young people for various issues of the environment and its sustainable development."
@@ -176,13 +178,13 @@ const countryData = {
   },
   "pillar2": {
     "target": "90% of countries green national curriculum",
-    "questions": [
+    "questions": [ 
+      { "question": "Is climate change education included in the National Curriculum Framework", "answer": "N/A" },
       { "question": "National curriculum includes sustainable development?", "answer": "Yes" },
-      { "question": "National curriculum includes climate change?", "answer": "Yes" },
       { "question": "National curriculum includes biodiversity?", "answer": "Yes" },
       { "question": "Planning curriculum reform in next 3 years?", "answer": "Yes" }
     ],
-    "mecceGemrLink": "Not available or data not reviewed response",
+    "mecceGemrLink": "Not available or data not reviewed",
     "countryResponse": [
       { "type": "paragraph", "content": "The Ministry of Education considers education for sustainable development a cross-cutting approach, integrating its issues into the curriculum from primary school to high school. Concepts like climate change and biodiversity are incorporated throughout the students' journey." },
       { "type": "heading", "content": "Formació Andorrana (Andorran Education)" },
@@ -197,10 +199,10 @@ const countryData = {
     ]
   },
   "pillar3": {
-    "target": "50% of the countries have education in their NDCs to UNFCCC.",
+    "target": "The target is still under review by the Pillar 3 Working Group",
     "questions": [
-      { "question": "Education in NDCs?", "answer": "Yes" },
-      { "question": "Climate education in ESPs?", "answer": "[Under development by IIEP]" },
+      { "question": "Is education reflected in the Nationally Determined Contributions (NDC) to United Nations Framework Convention on Climate Change (UNFCCC)", "answer": "Yes" },
+      { "question": "Education for sustainable development and climate education in Education Sector Plans", "answer": "[Under development by IIEP]" },
       { "question": "Legislation on sustainable education?", "answer": "Yes" },
       { "question": "Policy/action plan for sustainable education?", "answer": "Yes" },
       { "question": "Pre-service/in-service training on sustainability?", "answer": "Yes" }
@@ -220,11 +222,11 @@ const countryData = {
     ]
   },
   "pillar4": {
-    "target": "20% of cities and communities in each country have at least one climate change lifelong learning programme",
+    "target": "The target is still under review by the Pillar 4 Working Group",
     "citiesWithLifelongLearningProgramsCount": "Not available or data not reviewed response",
     "learningCities": ["Not available or data not reviewed response"],
     "questions": [
-      { "question": "National/local policies for climate-resilient communities?", "answer": "Yes" }
+      { "question": "Are there national or local policies in building climate-resilient communities through lifelong learning? ", "answer": "Yes" }
     ],
     "unescoLearningCitiesLink": "Not available or data not reviewed response",
     "countryResponse": [
@@ -276,7 +278,7 @@ const StatusBadge = ({ status, className = '' }) => {
     }
 
     return (
-        <div className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${bgColor} ${className}`}>
+        <div className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold font-primary ${bgColor} ${className}`}>
             <span className={`w-2 h-2 mr-2 rounded-full ${dotColor}`}></span>
             {text}
         </div>
@@ -284,7 +286,7 @@ const StatusBadge = ({ status, className = '' }) => {
 };
 
 // --- REDESIGNED CountryResponseBox with smooth transition ---
-const CountryResponseBox = ({ data, characterLimit = 200 }) => {
+const CountryResponseBox = ({ data, characterLimit = 150  }) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const contentRef = useRef(null);
 
@@ -374,10 +376,13 @@ const LinkButton = ({ href, text, icon: Icon }) => (
 );
 
 const PillarTarget = ({ text }) => (
-    <div className="flex items-start gap-3 text-teal-900 bg-teal-50 rounded-lg p-3 mb-5 border border-teal-200/60">
-        <Target size={20} className="text-teal-600 flex-shrink-0 mt-0.5" />
-        <p className="text-xs font-medium"><span className="font-bold mr-1">Target:</span>{text}</p>
-    </div>
+    <div className="flex items-start gap-3 text-teal-900 bg-teal-50 rounded-lg p-3 mb-5 border border-teal-200/60 h-16">
+    <Target size={20} className="text-teal-600 flex-shrink-0 mt-0.5" />
+    <p className="text-xs font-medium leading-snug">
+      <span className="font-bold mr-1">Target:</span>
+      {text}
+    </p>
+  </div>
 );
 
 const PillarQuestion = ({ item }) => (
@@ -417,31 +422,37 @@ const CountryProfileHeader = ({ countryName, isMember }) => (
 );
 
 const PillarCard = ({ imageSrc, title, children, color }) => (
-    <Card>
-        <div className="flex items-center mb-4">
-             <div className="bg-[#F1F4F6] p-3 rounded-xl mr-4 border border-slate-200/80 shadow-sm">
-                <img 
-                    src={imageSrc} 
-                    alt={`${title} icon`} 
-                    className="w-12 h-12 object-contain"
-                    onError={(e) => { e.currentTarget.src = `https://placehold.co/64x64/eee/ccc?text=Img`; }}
-                />
-            </div>
-            <h3 className="text-xl font-bold tracking-tight" style={{ color }}>{title}</h3>
-        </div>
-        <div className="flex flex-col flex-grow mt-2">
-            {children}
-        </div>
-    </Card>
+  <Card>
+    <div className="flex items-center mb-5 min-h-[108px]">
+      <img 
+        src={imageSrc} 
+        alt={`${title} icon`} 
+        className="w-12 h-12 object-contain flex-shrink-0"
+      />
+      <h3 
+        className="text-xl font-bold tracking-tight ml-3 leading-snug"
+        style={{ color }}
+      >
+        {title}
+      </h3>
+    </div>
+
+    {/* Content */}
+    <div>
+      {children}
+    </div>
+  </Card>
 );
 
+
 const Pillar1Card = ({ data }) => (
-    <PillarCard imageSrc={pillar1_image} title="Greening Schools" color="#6FAC44">
+    <PillarCard imageSrc={pillar1_image} title="Greening schools" color="#6FAC44">
         <PillarTarget text={data.target} />
         <div className="text-center my-4">
             <p className="text-6xl font-extrabold" style={{ color: "#6FAC44" }}>{data.greenSchoolsCount.toLocaleString()}</p>
             <p className="text-sm text-gray-500 mt-1 font-medium">Number of Green Schools</p>
         </div>
+        <p className="text-m text-gray-800 mt-1 font-medium">Is there a national accreditation, award, or network recognizing schools for their work on sustainability and climate change?</p>
         <div className="space-y-1 mb-4">
             {data.questions.map((q, i) => <PillarQuestion key={i} item={q} />)}
         </div>
@@ -450,10 +461,18 @@ const Pillar1Card = ({ data }) => (
 );
 
 const Pillar2Card = ({ data }) => (
-    <PillarCard imageSrc={pillar2_image} title="Greening Curriculum" color="#5DAF8B">
+    <PillarCard imageSrc={pillar2_image} title="Greening curriculum" color="#5DAF8B">
         <PillarTarget text={data.target} />
+        <div className="text-center my-4">
+            <p className="text-6xl font-extrabold" style={{ color: "#5CAF89" }}>{data.questions[0]?.answer}</p>
+            
+            <p className="text-sm text-gray-400 mt-1 font-medium">Review and analysis beginning conducted by Global Education Monitoring Report and it is not yet complete</p>
+            <p className="text-sm text-gray-500 mt-1 font-medium">{data.questions[0]?.question}</p>
+        </div>
         <div className="space-y-1 my-4">
-            {data.questions.map((q, i) => <PillarQuestion key={i} item={q} />)}
+            {data.questions.slice(1).map((q, i) => (
+                <PillarQuestion key={i + 1} item={q} />
+            ))}
         </div>
         {data.mecceGemrLink && <LinkButton href={data.mecceGemrLink} text="View MECCE/GEMR Profile" icon={Link2} />}
         <CountryResponseBox data={data.countryResponse} />
@@ -461,10 +480,16 @@ const Pillar2Card = ({ data }) => (
 );
 
 const Pillar3Card = ({ data }) => (
-    <PillarCard imageSrc={pillar3_image} title="Teacher Capacity" color="#085658">
+    <PillarCard imageSrc={pillar3_image} title="Greening teacher training and education systems’ capacities" color="#085658">
         <PillarTarget text={data.target} />
+        <div className="text-center my-4">
+            <p className="text-6xl font-extrabold" style={{ color: "#095657" }}>{data.questions[0]?.answer}</p>
+            <p className="text-sm text-gray-500 mt-1 font-medium">{data.questions[0]?.question}</p>
+        </div>
         <div className="space-y-1 my-4">
-            {data.questions.map((q, i) => <PillarQuestion key={i} item={q} />)}
+            {data.questions.slice(1).map((q, i) => (
+                <PillarQuestion key={i + 1} item={q} />
+            ))}
         </div>
         <div className="mt-4 space-y-3">
             {data.ndcLink && <LinkButton href={data.ndcLink} text="Country NDC Document" icon={FileText} />}
@@ -475,7 +500,7 @@ const Pillar3Card = ({ data }) => (
 );
 
 const Pillar4Card = ({ data }) => (
-    <PillarCard imageSrc={pillar4_image} title="Greening Communities" color="#56813A">
+    <PillarCard imageSrc={pillar4_image} title="Greening communities" color="#56813A">
         <PillarTarget text={data.target} />
         <div className="text-center my-4">
             <p className="text-6xl font-extrabold" style={{ color: "#56813A" }}>
@@ -498,7 +523,7 @@ const GepMemberListCard = ({ organizations }) => (
     <Card id="gep-membership-list" className="bg-gradient-to-br from-green-50 to-teal-50">
         <h3 className="text-2xl font-bold text-gray-800 mb-2">GEP Member Organizations ({organizations.length})</h3>
         <p className="text-sm text-gray-600 mb-6">Official Greening Education Partnership member organizations in this country.</p>
-        {organizations.length > 0 && (
+        {/* {organizations.length > 0 && (
             <details className="group">
                 <summary className="list-none flex items-center justify-between p-4 bg-white/80 rounded-xl cursor-pointer hover:bg-white transition-colors shadow-sm">
                     <span className="font-semibold text-gray-800">View Member List</span>
@@ -512,7 +537,7 @@ const GepMemberListCard = ({ organizations }) => (
                     ))}
                 </ul>
             </details>
-        )}
+        )} */}
     </Card>
 );
 
@@ -573,8 +598,8 @@ export default function App() {
                 </main>
             </div>
             {/* These would be your other components */}
-            {/* <ImpactStories /> */}
-            {/* <QuickLinksSection /> */}
+            <ImpactStories />
+            <QuickLinksSection />
         </div>
     );
 }

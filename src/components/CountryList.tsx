@@ -53,7 +53,7 @@ function CountryList() {
           <div className="inline-block p-2 bg-white/10 backdrop-blur-sm rounded-full mb-4">
             <Globe className="text-white h-8 w-8" />
           </div>
-          <h1 className="text-5xl font-bold mb-4 tracking-tight">GEP Country Profiles</h1>
+          <h1 className="text-5xl font-primary font-bold mb-4 tracking-tight">GEP Country Profiles</h1>
           {/* <p className="text-xl max-w-2xl mx-auto">
             Explore climate-smart education initiatives and track progress across different countries
           </p> */}
@@ -105,7 +105,7 @@ function CountryList() {
       </div>
 
       {/* Results Section */}
-      <div className="container mx-auto px-4 py-4">
+      <div className="max-w-6xl container mx-auto px-4 py-4">
         <div className="mb-6 flex justify-between items-center">
           <h2 className="text-2xl font-semibold text-gray-800">
             {filteredCountries.length} {filteredCountries.length === 1 ? 'Country' : 'Countries'} Found
@@ -113,7 +113,7 @@ function CountryList() {
         </div>
 
         {/* Countries Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 mb-12">
           {filteredCountries.map((country) => (
             <div
               key={country.id}
@@ -131,14 +131,14 @@ function CountryList() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                  <p className="text-sm font-medium flex items-center">
+                  <p className="text-sm font-primary font-medium flex items-center">
                     <MapPin size={14} className="mr-1" />
                     {country.region}
                   </p>
                 </div>
               </div>
               <div className="p-5">
-                <h3 className="text-xl font-semibold mb-2 text-gray-800 group-hover:text-green-600 transition-colors duration-300">{country.name}</h3>
+                <h3 className="text-xl font-primary font-semibold mb-2 text-gray-800 group-hover:text-green-600 transition-colors duration-300">{country.name}</h3>
                 <p className="text-gray-600 text-sm">
                   View detailed sustainability and climate education profile
                 </p>

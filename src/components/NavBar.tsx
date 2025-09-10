@@ -1,7 +1,7 @@
 import React, { useState } from "react";  
 import { FiSearch, FiMenu, FiX } from "react-icons/fi";
 import { Link, useLocation } from "react-router-dom";
-import logo from "./../imgs/image.png"; // Assuming logo is placed in the public folder
+import logo from "./../imgs/logo.png"; // Assuming logo is placed in the public folder
 import { cn } from "@/lib/utils";
 import { 
   NavigationMenu,
@@ -55,7 +55,7 @@ const NavBar: React.FC = () => {
           {/* Left side - Logo and Hamburger Menu */}
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center">
-              <img src={logo} alt="logo" className="h-16 w-auto rounded-lg" />
+              <img src={logo} alt="logo" className="h-20 w-auto rounded-lg" />
             </Link>
           </div>
 

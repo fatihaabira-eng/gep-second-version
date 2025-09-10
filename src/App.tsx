@@ -44,7 +44,7 @@ const App = () => (
               </Routes>
             </main>
             <Footer />
-            <ChatAssistant />
+            {/* <ChatAssistant /> */}
           </div>
         </BrowserRouter>
       </TooltipProvider>
